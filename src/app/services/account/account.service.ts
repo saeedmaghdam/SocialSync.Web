@@ -3,8 +3,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiPath } from 'src/app/apiPath';
 import { environment } from '../../../environments/environment';
-import { LoginModel } from '../models/login-model';
-import { SessionModel } from '../models/session-model';
+import { LoginResponseModel } from './models/login-response-model';
+import { SessionResponseModel } from './models/session-response-model';
 
 
 @Injectable({
@@ -30,7 +30,7 @@ export class AccountService implements OnInit {
     if (session == null || session == undefined)
       return false;
 
-    let sessionModel: SessionModel = JSON.parse(session);
+    let sessionModel: SessionResponseModel = JSON.parse(session);
     if (sessionModel == null || sessionModel == undefined)
       return false;
 
@@ -46,7 +46,7 @@ export class AccountService implements OnInit {
   Login(username: string, password: string) {
     let url = `${this._controllerPath}/login`
 
-    return this._http.post<LoginModel>(url, {
+    return this._http.post<LoginResponseModel>(url, {
       username: username,
       password: password
     });
@@ -55,7 +55,7 @@ export class AccountService implements OnInit {
   Logout() {
     let url = `${this._controllerPath}/logout`
 
-    return this._http.post<LoginModel>(url, { });
+    return this._http.post<LoginResponseModel>(url, { });
   }
 
   GetToken() {
@@ -63,7 +63,7 @@ export class AccountService implements OnInit {
       this._router.navigate(['/login']);
 
     let session = localStorage.getItem('session');
-    let sessionModel: SessionModel = JSON.parse(session!);
+    let sessionModel: SessionResponseModel = JSON.parse(session!);
     if (sessionModel == null || sessionModel == undefined)
       return null;
 

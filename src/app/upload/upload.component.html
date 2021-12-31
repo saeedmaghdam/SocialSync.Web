@@ -1,0 +1,19 @@
+<div class="row" style="margin-bottom:15px;">
+  <div class="col-md-12">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [accept]="accept">
+    <button mat-flat-button color="accent" (click)="file.click()" class="fill">{{title}}</button>
+  </div>
+  <div class="col-md-12">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>
+<div class="row" *ngIf="this.showPreview.trim().toLowerCase() == 'true'">
+  <div class="col-md-6 offset-md-3 col-12">
+    <img [src]="imageSrc" />
+  </div>
+</div>

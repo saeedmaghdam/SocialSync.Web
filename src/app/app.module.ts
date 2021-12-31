@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatSelectModule } from '@angular/material/select'
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -23,13 +25,19 @@ import { AuthInterceptor } from './auth.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { NewAppComponent } from './new-app/new-app.component';
+import { EnumToArrayPipe } from './pipes/EnumToArrayPipe';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewAppComponent,
+    EnumToArrayPipe,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +48,8 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+    MatStepperModule,
+    MatSelectModule,
 
     ReactiveFormsModule,
     FormsModule,
@@ -48,6 +58,9 @@ import { CommonModule } from '@angular/common';
 
     CommonModule,
     ToastrModule.forRoot()
+  ],
+  exports: [
+    EnumToArrayPipe
   ],
   providers: [AppGuard, LoggedInAppGuard,
     {

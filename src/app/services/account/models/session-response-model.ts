@@ -1,4 +1,4 @@
-export class SessionModel {
+export class SessionResponseModel {
   token!: string;
   expirationDate!: Date;
 }

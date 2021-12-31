@@ -5,7 +5,7 @@
     </button>
   </div>
 
-  <button mat-button routerLink="/">
+  <button mat-button routerLink="/" (click)="sidenav.close()">
     <span>App Status</span>
   </button>
 </mat-toolbar>
@@ -13,6 +13,8 @@
 
   <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
     <div fxLayout="column">
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard">Dashboard</a>
+      <hr />
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/wishlist">Wishlist</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/applied">Applied</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/interview">Interview</a>

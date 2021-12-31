@@ -1,6 +1,6 @@
 import { BaseModel } from "src/app/models/base-model";
 
-export class LoginModel extends BaseModel {
+export class LoginResponseModel extends BaseModel {
   data!: LoginModelData;
 }
 

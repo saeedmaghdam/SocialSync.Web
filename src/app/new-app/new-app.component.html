@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+      <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <mat-step [stepControl]="companyFormGroup">
+          <form [formGroup]="companyFormGroup" autocomplete="off">
+            <ng-template matStepLabel>Fill out company information</ng-template>
+            <div class="container">
+              <mat-form-field class="input" appearance="fill" class="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput formControlName="name" placeholder="Enter company's name"
+                  [disabled]="_loading">
+                <mat-error>
+                  Company's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input" appearance="fill" class="fill">
+                <mat-label>Url</mat-label>
+                <input type="text" matInput formControlName="url" placeholder="Enter company's url"
+                  [disabled]="_loading">
+                <mat-error>
+                  Company's url is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <div class="emailsContainer">
+                <h3>Emails</h3>
+                <div formArrayName="emails">
+                  <div *ngFor="let email of getEmailsArray().controls; let i = index;">
+                    <div [formGroupName]="i">
+                      <mat-form-field class="input" appearance="fill" class="fill">
+                        <mat-label>Email</mat-label>
+                        <input type="text" matInput formControlName="email" placeholder="Enter company's email address"
+                          [disabled]="_loading" autocomplete="off">
+                      </mat-form-field>
+                      <button mat-icon-button color="warn" class="delete" (click)="deleteEmail(i)">X</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-container">
+                  <button mat-mini-fab (click)="addCompanyEmail()" color="warn" class="right">
+                    <mat-icon>+</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="phoneNumbersContainer">
+                <h3>Phone numbers</h3>
+                <div formArrayName="phoneNumbers">
+                  <div *ngFor="let phoneNumber of getPhoneNumbersArray().controls; let i = index;">
+                    <div [formGroupName]="i">
+                      <mat-form-field class="input" appearance="fill" class="fill">
+                        <mat-label>Phone Number</mat-label>
+                        <input type="text" matInput formControlName="phoneNumber"
+                          placeholder="Enter company's phone number address" [disabled]="_loading"
+                          autocomplete="off">
+                      </mat-form-field>
+                      <button mat-icon-button color="warn" class="delete" (click)="deletePhoneNumber(i)">X</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-container">
+                  <button mat-mini-fab (click)="addCompanyPhoneNumbers()" color="warn" class="right">
+                    <mat-icon>+</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <mat-form-field class="input" appearance="fill" class="fill">
+                <mat-label>Address</mat-label>
+                <input type="text" matInput formControlName="address" placeholder="Enter company's address"
+                  [disabled]="_loading">
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext color="primary">Next</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="employeesFormGroup">
+          <form [formGroup]="employeesFormGroup" autocomplete="off">
+            <ng-template matStepLabel>Fill out employees information</ng-template>
+            <div class="container">
+              <div class="employeesContainer">
+                <div formArrayName="employees">
+                  <div *ngFor="let employee of getEmployeesArray().controls; let i = index;">
+                    <div class="employeeBox">
+                      <div [formGroupName]="i">
+                        <mat-form-field class="input" appearance="fill" class="fill">
+                          <mat-label>Employee's Name</mat-label>
+                          <input type="text" matInput formControlName="name" placeholder="Enter employee's name"
+                            [disabled]="_loading" autocomplete="off">
+                          <mat-error>
+                            Employee's name is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="fill">
+                          <mat-label>Position</mat-label>
+                          <mat-select formControlName="roleId">
+                            <mat-option *ngFor="let item of roleEnum | enumToArray" [value]="item.key">
+                              {{item.value}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="input" appearance="fill" class="fill">
+                          <mat-label>Employee's Phone Number</mat-label>
+                          <input type="text" matInput formControlName="phoneNumber"
+                            placeholder="Enter employee's phone number" [disabled]="_loading" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field class="input" appearance="fill" class="fill">
+                          <mat-label>Employee's Email</mat-label>
+                          <input type="text" matInput formControlName="email"
+                            placeholder="Enter employee's email address" [disabled]="_loading" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field class="input" appearance="fill" class="fill">
+                          <mat-label>Employee's Profile Url</mat-label>
+                          <input type="text" matInput formControlName="profileUrl"
+                            placeholder="Enter employee's profile url address" [disabled]="_loading" autocomplete="off">
+                        </mat-form-field>
+                        <app-upload (onUploadFinished)="uploadEmployeePicture($event, i)" title="Upload picture"
+                          accept=".jpeg,.jpg,.png,.bmp" showPreview="true"></app-upload>
+                        <button mat-button color="warn" (click)="deleteEmployee(i)">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-container">
+                  <button mat-mini-fab (click)="addEmployee()" color="warn" class="right">
+                    <mat-icon>+</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext color="primary">Next</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="applicationFormGroup">
+          <form [formGroup]="applicationFormGroup" autocomplete="off">
+            <ng-template matStepLabel>Fill out application information</ng-template>
+            <div class="container">
+              <mat-form-field class="input" appearance="fill" class="fill">
+                <mat-label>Apply Source</mat-label>
+                <input type="text" matInput formControlName="applySource" placeholder="Apply source address"
+                  [disabled]="_loading">
+                <mat-error>
+                  Company's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <app-upload (onUploadFinished)="uploadResume($event)" title="Upload Resume" accept=".pdf"
+                showPreview="false" class="fill"></app-upload>
+              <mat-error *ngIf="applicationFormGroup.controls['resumeId'].hasError('required')">
+                Resume file is <strong>required</strong>
+              </mat-error>
+              <app-upload (onUploadFinished)="uploadCoverLetter($event)" title="Upload Cover Letter" accept=".pdf"
+                showPreview="false" class="fill"></app-upload>
+              <mat-error *ngIf="applicationFormGroup.controls['coverLetterId'].hasError('required')">
+                Cover letter file is <strong>required</strong>
+              </mat-error>
+              <div>
+                <hr />
+                <button mat-flat-button matStepperNext color="primary" (click)="submit()" class="fill">Submit</button>
+                <button mat-button matStepperPrevious class="fill">Back</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>
