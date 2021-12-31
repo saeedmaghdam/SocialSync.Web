@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   _router: Router;
   _sharedService: SharedService;
 
+  _loading = false;
+
   errorMessage!: string;
 
   usernameFormControl = new FormControl('', [Validators.required]);
@@ -34,6 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this._loading = true;
+
     this._accountService.Login(this.usernameFormControl.value, this.passwordFormControl.value).subscribe((data) => {
       let model: LoginModel = data;
       let session: SessionModel = {
@@ -45,6 +49,8 @@ export class LoginComponent implements OnInit {
 
       this._router.navigate(['/dashboard']);
     }, (data) => {
+      this._loading = false;
+
       this._sharedService.toastError(data.error.error.error_description);
       // this._sharedService.OpenSnackBar(this.errorMessage = data.error.error.error_description, 'close')
     })

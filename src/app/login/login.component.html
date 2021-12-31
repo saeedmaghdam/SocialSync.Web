@@ -10,7 +10,7 @@
         <mat-form-field class="input" appearance="fill">
           <mat-label>Username</mat-label>
           <input type="text" matInput [formControl]="usernameFormControl" [errorStateMatcher]="matcher"
-            placeholder="Enter your username">
+            placeholder="Enter your username" [disabled]="_loading">
           <mat-error *ngIf="usernameFormControl.hasError('email') && !usernameFormControl.hasError('required')">
             Username is required
           </mat-error>
@@ -25,7 +25,7 @@
         <mat-form-field class="input" appearance="fill">
           <mat-label>Password</mat-label>
           <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-            placeholder="Enter your username">
+            placeholder="Enter your username" [disabled]="_loading">
           <mat-error *ngIf="passwordFormControl.hasError('email') && !passwordFormControl.hasError('required')">
             Username is required
           </mat-error>
@@ -37,7 +37,7 @@
     </div>
     <div class="row">
       <div class="col-8 offset-2 col-md-4 offset-md-4">
-        <button mat-flat-button color="primary" (click)="login()" [disabled]="!usernameFormControl.valid || !passwordFormControl.valid">Sign In</button>
+        <button mat-flat-button color="primary" (click)="login()" [disabled]="!usernameFormControl.valid || !passwordFormControl.valid || _loading">Sign In</button>
       </div>
     </div>
   </form>
