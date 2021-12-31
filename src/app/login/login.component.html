@@ -1,0 +1,44 @@
+<div class="container">
+  <form class="form">
+    <div class="row">
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <h1>App Status</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput [formControl]="usernameFormControl" [errorStateMatcher]="matcher"
+            placeholder="Enter your username">
+          <mat-error *ngIf="usernameFormControl.hasError('email') && !usernameFormControl.hasError('required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+            placeholder="Enter your username">
+          <mat-error *ngIf="passwordFormControl.hasError('email') && !passwordFormControl.hasError('required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <button mat-flat-button color="primary" (click)="login()" [disabled]="!usernameFormControl.valid || !passwordFormControl.valid">Sign In</button>
+      </div>
+    </div>
+  </form>
+</div>
