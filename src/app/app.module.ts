@@ -21,6 +21,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggedInAppGuard } from './logged-in-app-guard.guard';
 import { AuthInterceptor } from './auth.interceptor';
 
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,10 @@ import { AuthInterceptor } from './auth.interceptor';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [AppGuard, LoggedInAppGuard,
     {
