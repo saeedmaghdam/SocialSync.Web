@@ -14,7 +14,7 @@
       <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download cover letter">
         <mat-icon>assignment</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="update">
+      <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="update" disabled="disabled">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button color="primary" (click)="OpenToDoDialog(application.id, application.toDo)" title="To Do">
@@ -28,10 +28,11 @@
       <span class="history">History</span>
       <ul class="history">
         <li *ngFor="let historyItem of application.history | slice:0:3">{{ historyItem.recordInsertDate |
+          date:'yyyy-MM-dd' }} {{ historyItem.recordInsertDate |
           date:'shortTime' }} - {{ historyItem.description }}</li>
       </ul>
       <div class="view-more-container">
-        <button *ngIf="application.history.length > 3" mat-button color="primary" class="view-more">
+        <button *ngIf="application.history.length > 3" (click)="OpenLogMessagesDialog(application.history)" mat-button color="primary" class="view-more">
           View More
         </button>
       </div>

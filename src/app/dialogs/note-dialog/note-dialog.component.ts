@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
-  operation: string;
   notes: string;
 }
 
@@ -16,5 +15,9 @@ export class NoteDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<NoteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+  ) { }
+
+  Submit() {
+    this.dialogRef.close(this.data);
+  }
 }

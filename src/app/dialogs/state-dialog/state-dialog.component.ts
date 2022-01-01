@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { State } from 'src/app/constants/state.enum';
 
 export interface StateDialogData {
-  operation: string;
   stateId: number;
+  logMessage: string;
 }
 
 @Component({
@@ -13,6 +13,8 @@ export interface StateDialogData {
   styleUrls: ['./state-dialog.component.sass']
 })
 export class StateDialogComponent implements OnInit {
+
+  logMessage!: string;
 
   stateEnum = State;
 
@@ -23,4 +25,11 @@ export class StateDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  Submit() {
+    this.dialogRef.close(this.data);
+  }
+
+  OnChangeState(event: any){
+    this.data.stateId = parseInt(event.value);
+  }
 }

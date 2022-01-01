@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+  <ul class="history">
+    <li *ngFor="let historyItem of data.logMessages">{{ historyItem.recordInsertDate |
+      date:'yyyy-MM-dd' }} {{ historyItem.recordInsertDate | date:'shortTime' }} - {{ historyItem.description }}</li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Close</button>
+</div>

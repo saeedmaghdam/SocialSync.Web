@@ -1,5 +1,14 @@
 <div mat-dialog-content>
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle [mat-dialog-close]="data" *ngFor="let item of stateEnum | enumToArray" value="{{ item.key }}" [checked]="item.key == data.stateId" (click)="item.key == data.stateId ? data.operation = 'cancelled' : data.operation = 'ok'; data.stateId = item.key;">{{ item.value }}</mat-button-toggle>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Log Message</mat-label>
+    <input matInput placeholder="Ex. Jack called me using Skype ..." [(ngModel)]="data.logMessage">
+  </mat-form-field>
+  <mat-button-toggle-group aria-label="Font Style" (change)="OnChangeState($event)">
+    <mat-button-toggle *ngFor="let item of stateEnum | enumToArray" [checked]="item.key == data.stateId" [value]="item.key">{{ item.value }}</mat-button-toggle>
   </mat-button-toggle-group>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button (click)="Submit()" cdkFocusInitial>Submit</button>
 </div>

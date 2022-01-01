@@ -50,19 +50,21 @@ export class ApplicationService {
     });
   }
 
-  CreateToDo(id: string, title: string){
-    let url = `${this._controllerPath}/${id}/toDo`;
+  CreateAndPatchToDo(id: string, title: string, toDoIds: string[]){
+    let url = `${this._controllerPath}/${id}/createAndPatchToDo`;
 
     return this._http.post(url, {
-      title: title
+      title: title,
+      toDoIds: toDoIds
     });
   }
 
-  PatchState(id: string, stateId: number){
+  PatchState(id: string, stateId: number, logMessage: string){
     let url = `${this._controllerPath}/${id}/state`;
 
     return this._http.patch(url, {
-      stateId: stateId
+      stateId: stateId,
+      logMessage: logMessage
     });
   }
 }

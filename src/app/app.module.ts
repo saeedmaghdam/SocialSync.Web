@@ -38,6 +38,7 @@ import { DateDiffPipe } from './pipes/DateDiffPipe';
 import { TodoDialogComponent } from './dialogs/todo-dialog/todo-dialog.component';
 import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component';
 import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.component';
+import { LogMessageDialogComponent } from './dialogs/log-message-dialog/log-message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.compon
     ApplicationListComponent,
     NoteDialogComponent,
     TodoDialogComponent,
-    StateDialogComponent
+    StateDialogComponent,
+    LogMessageDialogComponent
   ],
   imports: [
     BrowserModule,
