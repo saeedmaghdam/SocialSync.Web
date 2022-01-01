@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ApiPath } from 'src/app/apiPath';
@@ -34,7 +34,7 @@ export class ApplicationService {
     return this._http.post(url, model);
   }
 
-  PatchNotes(id: string, notes: string){
+  PatchNotes(id: string, notes: string) {
     let url = `${this._controllerPath}/${id}/notes`;
 
     return this._http.patch(url, {
@@ -42,7 +42,7 @@ export class ApplicationService {
     });
   }
 
-  PatchToDoStatus(id: string, toDoIds: string[]){
+  PatchToDoStatus(id: string, toDoIds: string[]) {
     let url = `${this._controllerPath}/${id}/toDoStatus`;
 
     return this._http.patch(url, {
@@ -50,7 +50,7 @@ export class ApplicationService {
     });
   }
 
-  CreateAndPatchToDo(id: string, title: string, toDoIds: string[]){
+  CreateAndPatchToDo(id: string, title: string, toDoIds: string[]) {
     let url = `${this._controllerPath}/${id}/createAndPatchToDo`;
 
     return this._http.post(url, {
@@ -59,12 +59,20 @@ export class ApplicationService {
     });
   }
 
-  PatchState(id: string, stateId: number, logMessage: string){
+  PatchState(id: string, stateId: number, logMessage: string) {
     let url = `${this._controllerPath}/${id}/state`;
 
     return this._http.patch(url, {
       stateId: stateId,
       logMessage: logMessage
+    });
+  }
+
+  Delete(id: string) {
+    let url = `${this._controllerPath}/${id}`;
+
+    return this._http.delete(url, {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
     });
   }
 }

@@ -11,7 +11,7 @@
       <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download resume">
         <mat-icon>assignment_ind</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download cover letter">
+      <button mat-icon-button color="primary" (click)="Download(application.coverLetterId)" title="Download cover letter">
         <mat-icon>assignment</mat-icon>
       </button>
       <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="update" disabled="disabled">
@@ -22,6 +22,9 @@
       </button>
       <button mat-icon-button color="primary" (click)="OpenNotesDialog(application.id, application.notes)" title="Notes">
         <mat-icon matBadgeColor="warn">notes</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="OpenDeleteDialog(application.id)" title="Delete" class="right">
+        <mat-icon matBadgeColor="warn">delete</mat-icon>
       </button>
     </div>
     <div *ngIf="application.history.length > 0">

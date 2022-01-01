@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { LogMessageDialogComponent } from '../dialogs/log-message-dialog/log-message-dialog.component';
 import { NoteDialogComponent } from '../dialogs/note-dialog/note-dialog.component';
 import { StateDialogComponent } from '../dialogs/state-dialog/state-dialog.component';
-import { DialogDataItem, TodoDialogComponent } from '../dialogs/todo-dialog/todo-dialog.component';
+import { TodoDialogComponent } from '../dialogs/todo-dialog/todo-dialog.component';
 import { ApplicationService } from '../services/application/application.service';
 import { ApplicationHistoryItemViewModel, ApplicationToDoItemViewModel, ApplicationViewModel } from '../services/application/view-models/application-view-model';
 import { ObjectService } from '../services/object/object.service';
@@ -87,7 +88,7 @@ export class ApplicationListComponent implements OnInit {
 
       this._applicationService.CreateAndPatchToDo(applicationId, result.title, toDoIds).subscribe(() => {
         this._applicationService.Subject.next(true);
-        this._sharedService.toastSuccess("To-do submitted successfully.");
+        this._sharedService.toastSuccess("Submitted successfully.");
       });
     });
   }
@@ -105,6 +106,23 @@ export class ApplicationListComponent implements OnInit {
       this._applicationService.PatchState(applicationId, result.stateId, result.logMessage).subscribe(() => {
         this._applicationService.Subject.next(true);
         this._sharedService.toastSuccess("State updated successfully.")
+      });
+    });
+  }
+
+  OpenDeleteDialog(applicationId: string): void {
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: "Are you sure?" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == undefined)
+        return;
+
+      this._applicationService.Delete(applicationId).subscribe(() => {
+        this._applicationService.Subject.next(true);
+        this._sharedService.toastSuccess("Application deleted successfully.")
       });
     });
   }

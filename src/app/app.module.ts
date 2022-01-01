@@ -39,6 +39,7 @@ import { TodoDialogComponent } from './dialogs/todo-dialog/todo-dialog.component
 import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component';
 import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.component';
 import { LogMessageDialogComponent } from './dialogs/log-message-dialog/log-message-dialog.component';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LogMessageDialogComponent } from './dialogs/log-message-dialog/log-mess
     NoteDialogComponent,
     TodoDialogComponent,
     StateDialogComponent,
-    LogMessageDialogComponent
+    LogMessageDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
