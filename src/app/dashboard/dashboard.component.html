@@ -1,1 +1,60 @@
-<p>dashboard works!</p>
+<div class="flex-root-container">
+  <div class="flex-container">
+    <div class="flex-items">
+      <div class="mat-card-name">
+        <div class="badge">{{ getWishlistApplications()?.length }}</div>
+        <h2>Wishlist</h2>
+      </div>
+      <mat-card>
+        <app-application-list [applications]="getWishlistApplications()"
+          [totalApplicationsCount]="getTotalWishlistApplications()" emptyMessage="No Jobs on your wishlist yet">
+        </app-application-list>
+      </mat-card>
+    </div>
+    <div class="flex-items">
+      <div class="mat-card-name">
+        <div class="badge">{{ getAppliedApplications()?.length }}</div>
+        <h2>Applied</h2>
+      </div>
+      <mat-card>
+        <app-application-list [applications]="getAppliedApplications()"
+          [totalApplicationsCount]="getTotalAppliedApplications()" emptyMessage="No jobs applied to yet">
+        </app-application-list>
+      </mat-card>
+    </div>
+    <div class="flex-items">
+      <div class="mat-card-name">
+        <div class="badge">{{ getInterviewApplications()?.length }}</div>
+        <h2>Interview</h2>
+      </div>
+      <mat-card>
+        <app-application-list [applications]="getInterviewApplications()"
+          [totalApplicationsCount]="getTotalInterviewApplications()" emptyMessage="No jobs in interview phase yet">
+        </app-application-list>
+      </mat-card>
+    </div>
+    <div class="flex-items">
+      <div class="mat-card-name">
+        <div class="badge">{{ getOfferApplications()?.length }}</div>
+        <h2>Offer</h2>
+      </div>
+      <mat-card>
+        <app-application-list [applications]="getOfferApplications()"
+          [totalApplicationsCount]="getTotalOfferApplications()" emptyMessage="No offers yet"></app-application-list>
+      </mat-card>
+    </div>
+    <div class="flex-items">
+      <div class="mat-card-name">
+        <div class="badge">{{ getRejectedApplications()?.length }}</div>
+        <h2>Rejected</h2>
+      </div>
+      <mat-card>
+        <app-application-list [applications]="getRejectedApplications()"
+          [totalApplicationsCount]="getTotalRejectedApplications()" emptyMessage="No rejections"></app-application-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<button mat-fab color="primary" class="add-new-application" routerLink="/dashboard/app/new">
+  <mat-icon>add_box</mat-icon>
+</button>

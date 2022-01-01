@@ -44,7 +44,7 @@ export class AccountService implements OnInit {
   }
 
   Login(username: string, password: string) {
-    let url = `${this._controllerPath}/login`
+    let url = `${this._controllerPath}/login`;
 
     return this._http.post<LoginResponseModel>(url, {
       username: username,
@@ -53,7 +53,7 @@ export class AccountService implements OnInit {
   }
 
   Logout() {
-    let url = `${this._controllerPath}/logout`
+    let url = `${this._controllerPath}/logout`;
 
     return this._http.post<LoginResponseModel>(url, { });
   }

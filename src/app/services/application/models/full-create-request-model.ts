@@ -1,9 +1,14 @@
 export class FullCreateRequestModel {
   Company!: FullCreateCompanyRequestModel;
   Employees!: FullCreateEmployeeRequestModel[];
+  JobTitle!: string;
+  StateId!: number;
   ApplySource!: string;
+  Salary!: string;
   ResumeId!: string;
   CoverLetterId!: string;
+  ToDo!: string[];
+  Notes!: string;
 }
 
 export class FullCreateCompanyRequestModel {

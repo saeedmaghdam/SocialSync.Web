@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatSelectModule } from '@angular/material/select'
+import { MatCardModule } from '@angular/material/card'
+import { MatBadgeModule } from '@angular/material/badge'
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -28,6 +31,9 @@ import { CommonModule } from '@angular/common';
 import { NewAppComponent } from './new-app/new-app.component';
 import { EnumToArrayPipe } from './pipes/EnumToArrayPipe';
 import { UploadComponent } from './upload/upload.component';
+import { ApplicationListComponent } from './application-list/application-list.component';
+import { DateDiffPipe } from './pipes/DateDiffPipe';
+import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,10 @@ import { UploadComponent } from './upload/upload.component';
     DashboardComponent,
     NewAppComponent,
     EnumToArrayPipe,
-    UploadComponent
+    DateDiffPipe,
+    UploadComponent,
+    ApplicationListComponent,
+    NoteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,9 @@ import { UploadComponent } from './upload/upload.component';
     MatSidenavModule,
     MatStepperModule,
     MatSelectModule,
+    MatCardModule,
+    MatBadgeModule,
+    MatDialogModule,
 
     ReactiveFormsModule,
     FormsModule,
@@ -60,7 +72,8 @@ import { UploadComponent } from './upload/upload.component';
     ToastrModule.forRoot()
   ],
   exports: [
-    EnumToArrayPipe
+    EnumToArrayPipe,
+    DateDiffPipe
   ],
   providers: [AppGuard, LoggedInAppGuard,
     {

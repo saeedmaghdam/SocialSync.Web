@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { Role } from '../constants/role.enum';
+import { State } from '../constants/state.enum';
 import { ApplicationService } from '../services/application/application.service';
 import { FullCreateCompanyRequestModel, FullCreateEmployeeRequestModel, FullCreateRequestModel } from '../services/application/models/full-create-request-model';
 import { SharedService } from '../services/shared/shared.service';
@@ -27,6 +28,7 @@ export class NewAppComponent implements OnInit {
   coverLetterId!: string;
 
   roleEnum = Role;
+  stateEnum = State;
 
   constructor(private formBuilder: FormBuilder, applicationService: ApplicationService, sharedService: SharedService, router: Router) {
     this._applicationService = applicationService;
@@ -46,9 +48,14 @@ export class NewAppComponent implements OnInit {
     });
 
     this.applicationFormGroup = formBuilder.group({
+      jobTitle: ['', [Validators.required]],
       applySource: ['', [Validators.required]],
+      salary: ['', []],
       resumeId: ['', [Validators.required]],
-      coverLetterId: ['', [Validators.required]]
+      coverLetterId: ['', [Validators.required]],
+      stateId: ['', [Validators.required]],
+      toDo: formBuilder.array([]),
+      notes: ['', []]
     });
   }
 
@@ -96,6 +103,18 @@ export class NewAppComponent implements OnInit {
     return this.employeesFormGroup.get('employees') as FormArray;
   }
 
+  addToDo() {
+    const control = this.formBuilder.group({
+      toDo: ['']
+    });
+
+    this.getToDoArray().push(control);
+  }
+
+  getToDoArray(): FormArray {
+    return this.applicationFormGroup.get('toDo') as FormArray;
+  }
+
   deleteEmail(index: number) {
     this.getEmailsArray().removeAt(index);
   }
@@ -106,6 +125,10 @@ export class NewAppComponent implements OnInit {
 
   deleteEmployee(index: number) {
     this.getEmployeesArray().removeAt(index);
+  }
+
+  deleteToDo(index: number) {
+    this.getToDoArray().removeAt(index);
   }
 
   submit() {
@@ -142,12 +165,21 @@ export class NewAppComponent implements OnInit {
       employees.push(newEmployee);
     }
 
+    let toDoArray = [];
+    for(let item of this.applicationFormGroup.value.toDo)
+      toDoArray.push(item.toDo);
+
     let model: FullCreateRequestModel = {
+      JobTitle: this.applicationFormGroup.value.jobTitle,
       ApplySource: this.applicationFormGroup.value.applySource,
+      Salary: this.applicationFormGroup.value.salary,
       CoverLetterId: this.applicationFormGroup.value.coverLetterId,
       ResumeId: this.applicationFormGroup.value.resumeId,
       Company: companyModel,
-      Employees: employees
+      Employees: employees,
+      StateId: this.applicationFormGroup.value.stateId,
+      Notes: this.applicationFormGroup.value.notes,
+      ToDo: toDoArray
     };
 
     if (this.companyFormGroup.valid && this.employeesFormGroup.valid && this.applicationFormGroup.valid) {

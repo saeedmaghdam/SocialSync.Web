@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Notes</mat-label>
+    <textarea matInput [(ngModel)]="data.notes" rows="10"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" (click)="data.operation = 'cancelled'; data.notes = '';">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" (click)="data.operation = 'ok'" cdkFocusInitial>Submit</button>
+</div>

@@ -1,0 +1,34 @@
+<div *ngIf="applications?.length == 0" class="no-items">{{ emptyMessage }}</div>
+
+<div *ngFor="let application of applications; let i = index">
+  <div class="application-container">
+    <h2>{{ application.company.name }}</h2>
+    <h3>{{ application.jobTitle }} - ({{ application.recordInsertDate | dateDiff }})</h3>
+    <div>
+      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download resume">
+        <mat-icon>assignment_ind</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download cover letter">
+        <mat-icon>assignment</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="To Do">
+        <mat-icon [matBadge]="application.unDoneToDoCount" [matBadgeHidden]="application.unDoneToDoCount == 0" matBadgeColor="warn">assignment_turned_in</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="openNotesDialog(application.id, application.notes)" title="Notes">
+        <mat-icon matBadgeColor="warn">notes</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="application.history.length > 0">
+      <span class="history">History</span>
+      <ul class="history">
+        <li *ngFor="let historyItem of application.history | slice:0:3">{{ historyItem.recordInsertDate |
+          date:'shortTime' }} - {{ historyItem.description }}</li>
+      </ul>
+      <div class="view-more-container">
+        <button *ngIf="application.history.length > 3" mat-button color="primary" class="view-more">
+          View More
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
