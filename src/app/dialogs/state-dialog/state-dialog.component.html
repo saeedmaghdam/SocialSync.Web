@@ -1,0 +1,5 @@
+<div mat-dialog-content>
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle [mat-dialog-close]="data" *ngFor="let item of stateEnum | enumToArray" value="{{ item.key }}" [checked]="item.key == data.stateId" (click)="item.key == data.stateId ? data.operation = 'cancelled' : data.operation = 'ok'; data.stateId = item.key;">{{ item.value }}</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

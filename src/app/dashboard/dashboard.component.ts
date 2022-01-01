@@ -18,6 +18,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDashboardData();
+
+    this._applicationService.Subject.subscribe(() => {
+      this.getDashboardData();
+    });
   }
 
   getDashboardData() {

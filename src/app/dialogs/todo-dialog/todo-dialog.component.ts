@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export interface DialogData {
   operation: string;
   todo: DialogDataItem[];
+  title: string;
 }
 
 export interface DialogDataItem {
@@ -20,8 +21,17 @@ export interface DialogDataItem {
 })
 export class TodoDialogComponent {
 
+  title!: string;
+
   constructor(
     public dialogRef: MatDialogRef<TodoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
+
+  AddToDo($event: Event) {
+    this.data.operation = 'addToDo';
+    console.log(this.title)
+    this.data.title = this.title;
+    this.dialogRef.close(this.data);
+  }
 }

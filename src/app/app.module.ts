@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -36,6 +37,7 @@ import { ApplicationListComponent } from './application-list/application-list.co
 import { DateDiffPipe } from './pipes/DateDiffPipe';
 import { TodoDialogComponent } from './dialogs/todo-dialog/todo-dialog.component';
 import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component';
+import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component
     UploadComponent,
     ApplicationListComponent,
     NoteDialogComponent,
-    TodoDialogComponent
+    TodoDialogComponent,
+    StateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component
     MatBadgeModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatButtonToggleModule,
 
     ReactiveFormsModule,
     FormsModule,

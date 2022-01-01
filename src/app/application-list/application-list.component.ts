@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from '../dialogs/note-dialog/note-dialog.component';
+import { StateDialogComponent } from '../dialogs/state-dialog/state-dialog.component';
 import { DialogDataItem, TodoDialogComponent } from '../dialogs/todo-dialog/todo-dialog.component';
 import { ApplicationService } from '../services/application/application.service';
 import { ApplicationToDoItemViewModel, ApplicationViewModel } from '../services/application/view-models/application-view-model';
@@ -51,7 +52,7 @@ export class ApplicationListComponent implements OnInit {
         return;
 
       this._applicationService.PatchNotes(applicationId, result.notes).subscribe(() => {
-        this.applications.find(x => x.id == applicationId)!.notes = result.notes;
+        this._applicationService.Subject.next(true);
         this._sharedService.toastSuccess("Notes updated successfully.")
       });
     });
@@ -62,7 +63,7 @@ export class ApplicationListComponent implements OnInit {
       width: '50vw',
       height: '60vh',
       data: {
-        todo: todo.map(x => {
+        todo: todo == null ? null : todo.map(x => {
           return {
             id: x.id,
             value: x.isDone,
@@ -77,33 +78,45 @@ export class ApplicationListComponent implements OnInit {
       if (result == undefined || result.operation == "cancelled")
         return;
 
-      let toDoIds: Array<string> = new Array<string>();
-      for (let item of result.todo) {
-        if (item.value != item.newValue)
-          toDoIds.push(item.id);
+      if (result.operation == "addToDo") {
+        this._applicationService.CreateToDo(applicationId, result.title).subscribe(() => {
+          this._applicationService.Subject.next(true);
+          this._sharedService.toastSuccess("To-do submitted successfully.");
+        });
       }
-
-      if (toDoIds.length == 0)
-        return;
-
-      this._applicationService.PatchToDoStatus(applicationId, toDoIds).subscribe(() => {
-        let application = this.applications.find(x => x.id == applicationId) as ApplicationViewModel;
-
-        let unDoneToDoChanges = 0;
-
-        for (let item of this.applications.find(x => x.id == applicationId)!.toDo) {
-          if (toDoIds.find(x => x == item.id) != null) {
-            item.isDone = !item.isDone;
-            if (item.isDone == true)
-              unDoneToDoChanges--
-            else
-              unDoneToDoChanges++
-          }
+      else {
+        let toDoIds: Array<string> = new Array<string>();
+        for (let item of result.todo) {
+          if (item.value != item.newValue)
+            toDoIds.push(item.id);
         }
 
-        application.unDoneToDoCount = application.unDoneToDoCount + unDoneToDoChanges;
+        if (toDoIds.length == 0)
+          return;
 
-        this._sharedService.toastSuccess("Notes updated successfully.");
+        this._applicationService.PatchToDoStatus(applicationId, toDoIds).subscribe(() => {
+          this._applicationService.Subject.next(true);
+          this._sharedService.toastSuccess("To-do items updated successfully.");
+        });
+      }
+    });
+  }
+
+  OpenStateDialog(applicationId: string, stateId: number): void {
+    const dialogRef = this._dialog.open(StateDialogComponent, {
+      width: '400px',
+      data: { stateId: stateId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+
+      if (result == undefined || result.operation == "cancelled")
+        return;
+
+      this._applicationService.PatchState(applicationId, result.stateId).subscribe(() => {
+        this._applicationService.Subject.next(true);
+        this._sharedService.toastSuccess("State updated successfully.")
       });
     });
   }

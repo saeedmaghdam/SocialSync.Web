@@ -2,7 +2,7 @@
 
 <div *ngFor="let application of applications; let i = index">
   <div class="application-container">
-    <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="right">
+    <button mat-icon-button color="primary" (click)="OpenStateDialog(application.id, application.stateId)" title="Update application" class="right">
       <mat-icon>flash_on</mat-icon>
     </button>
     <h2>{{ application.company.name }}</h2>
