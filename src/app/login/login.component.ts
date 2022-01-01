@@ -5,6 +5,7 @@ import { AccountService } from '../services/account/account.service';
 import { LoginResponseModel } from '../services/account/models/login-response-model';
 import { SessionResponseModel } from '../services/account/models/session-response-model';
 import { SharedService } from '../services/shared/shared.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   usernameFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required]);
 
-  constructor(accountService: AccountService, router: Router, sharedService: SharedService) {
+  constructor(accountService: AccountService, router: Router, sharedService: SharedService, private recaptchaV3Service: ReCaptchaV3Service) {
     this._accountService = accountService;
     this._router = router;
     this._sharedService = sharedService;
@@ -33,23 +34,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this._loading = true;
+    this.recaptchaV3Service.execute('importantAction')
+      .subscribe((token: string) => {
+        this._loading = true;
 
-    this._accountService.Login(this.usernameFormControl.value, this.passwordFormControl.value).subscribe((data) => {
-      let model: LoginResponseModel = data;
-      let session: SessionResponseModel = {
-        expirationDate: model.data.expirationDate,
-        token: model.data.token
-      }
+        this._accountService.Login(this.usernameFormControl.value, this.passwordFormControl.value, token).subscribe((data) => {
+          let model: LoginResponseModel = data;
+          let session: SessionResponseModel = {
+            expirationDate: model.data.expirationDate,
+            token: model.data.token
+          }
 
-      localStorage.setItem('session', JSON.stringify(session));
+          localStorage.setItem('session', JSON.stringify(session));
 
-      this._router.navigate(['/dashboard']);
-    }, (data) => {
-      this._loading = false;
+          this._router.navigate(['/dashboard']);
+        }, (data) => {
+          this._loading = false;
 
-      this._sharedService.toastError(data.error.error.error_description);
-      // this._sharedService.OpenSnackBar(this.errorMessage = data.error.error.error_description, 'close')
-    })
+          this._sharedService.toastError(data.error.error.error_description);
+          // this._sharedService.OpenSnackBar(this.errorMessage = data.error.error.error_description, 'close')
+        })
+      });
   }
 }

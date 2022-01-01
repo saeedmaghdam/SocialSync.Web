@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiPath } from 'src/app/apiPath';
@@ -43,19 +43,21 @@ export class AccountService implements OnInit {
     return true;
   }
 
-  Login(username: string, password: string) {
+  Login(username: string, password: string, token: string) {
     let url = `${this._controllerPath}/login`;
 
     return this._http.post<LoginResponseModel>(url, {
       username: username,
       password: password
+    }, {
+      headers: new HttpHeaders({'RecaptchaToken': token})
     });
   }
 
   Logout() {
     let url = `${this._controllerPath}/logout`;
 
-    return this._http.post<LoginResponseModel>(url, { });
+    return this._http.post<LoginResponseModel>(url, {});
   }
 
   GetToken() {

@@ -41,6 +41,9 @@ import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.compon
 import { LogMessageDialogComponent } from './dialogs/log-message-dialog/log-message-dialog.component';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +84,9 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
     HttpClientModule,
 
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+
+    RecaptchaV3Module
   ],
   exports: [
     EnumToArrayPipe,
@@ -89,10 +94,15 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
   ],
   providers: [AppGuard, LoggedInAppGuard,
     {
-    provide : HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi   : true
-  }],
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptcha.siteKey,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
