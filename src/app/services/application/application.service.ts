@@ -36,4 +36,12 @@ export class ApplicationService {
       notes: notes
     });
   }
+
+  PatchToDoStatus(id: string, toDoIds: string[]){
+    let url = `${this._controllerPath}/${id}/toDoStatus`;
+
+    return this._http.patch(url, {
+      toDoIds: toDoIds
+    });
+  }
 }

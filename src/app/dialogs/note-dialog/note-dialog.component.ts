@@ -17,10 +17,4 @@ export class NoteDialogComponent {
     public dialogRef: MatDialogRef<NoteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
-
-  onNoClick(): void {
-    this.data.operation = "canceled";
-    this.dialogRef.close();
-  }
-
 }

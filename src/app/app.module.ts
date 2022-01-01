@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatCardModule } from '@angular/material/card'
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -33,7 +34,8 @@ import { EnumToArrayPipe } from './pipes/EnumToArrayPipe';
 import { UploadComponent } from './upload/upload.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { DateDiffPipe } from './pipes/DateDiffPipe';
-import { NoteDialogComponent } from './note-dialog/note-dialog.component';
+import { TodoDialogComponent } from './dialogs/todo-dialog/todo-dialog.component';
+import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
     DateDiffPipe,
     UploadComponent,
     ApplicationListComponent,
-    NoteDialogComponent
+    NoteDialogComponent,
+    TodoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
     MatCardModule,
     MatBadgeModule,
     MatDialogModule,
+    MatCheckboxModule,
 
     ReactiveFormsModule,
     FormsModule,

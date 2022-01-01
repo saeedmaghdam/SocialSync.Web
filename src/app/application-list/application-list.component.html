@@ -2,6 +2,9 @@
 
 <div *ngFor="let application of applications; let i = index">
   <div class="application-container">
+    <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="right">
+      <mat-icon>flash_on</mat-icon>
+    </button>
     <h2>{{ application.company.name }}</h2>
     <h3>{{ application.jobTitle }} - ({{ application.recordInsertDate | dateDiff }})</h3>
     <div>
@@ -11,10 +14,13 @@
       <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download cover letter">
         <mat-icon>assignment</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="To Do">
+      <button mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="update">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="OpenToDoDialog(application.id, application.toDo)" title="To Do">
         <mat-icon [matBadge]="application.unDoneToDoCount" [matBadgeHidden]="application.unDoneToDoCount == 0" matBadgeColor="warn">assignment_turned_in</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="openNotesDialog(application.id, application.notes)" title="Notes">
+      <button mat-icon-button color="primary" (click)="OpenNotesDialog(application.id, application.notes)" title="Notes">
         <mat-icon matBadgeColor="warn">notes</mat-icon>
       </button>
     </div>
