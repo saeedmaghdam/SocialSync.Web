@@ -8,11 +8,11 @@
     <div class="row">
       <div class="col-8 offset-2 col-md-4 offset-md-4">
         <mat-form-field class="input" appearance="fill">
-          <mat-label>Username</mat-label>
-          <input type="text" matInput [formControl]="usernameFormControl" placeholder="Enter your username"
+          <mat-label>Mobile Number</mat-label>
+          <input type="text" matInput [formControl]="usernameFormControl" placeholder="Enter your mobile number"
             [disabled]="_loading">
           <mat-error *ngIf="usernameFormControl.hasError('required')">
-            Username is <strong>required</strong>
+            Mobile number is <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </div>

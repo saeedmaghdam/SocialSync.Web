@@ -62,7 +62,7 @@ export class ApplicationListComponent implements OnInit {
 
   OpenToDoDialog(applicationId: string, todo: ApplicationToDoItemViewModel[]): void {
     const dialogRef = this._dialog.open(TodoDialogComponent, {
-      width: '50vw',
+      width: '80vw',
       height: '60vh',
       data: {
         todo: todo == null ? null : todo.map(x => {
@@ -103,6 +103,9 @@ export class ApplicationListComponent implements OnInit {
       if (result == undefined)
         return;
 
+      if ((result.logMessage == undefined || result.logMessage == null || result.logMessage.trim() == "") && result.stateId == stateId)
+        return;
+
       this._applicationService.PatchState(applicationId, result.stateId, result.logMessage).subscribe(() => {
         this._applicationService.Subject.next(true);
         this._sharedService.toastSuccess("State updated successfully.")
@@ -112,7 +115,7 @@ export class ApplicationListComponent implements OnInit {
 
   OpenDeleteDialog(applicationId: string): void {
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
-      width: '400px',
+      width: '80vw',
       data: { message: "Are you sure?" }
     });
 
