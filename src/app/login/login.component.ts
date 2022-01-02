@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
         this._loading = true;
-        console.log(this.loginFormGroup.get("username")?.value);
         this._accountService.Login(this.loginFormGroup.get("username")?.value, this.loginFormGroup.get("password")?.value, token).subscribe((data) => {
           let model: LoginResponseModel = data;
           let session: SessionResponseModel = {

@@ -43,14 +43,14 @@ export class AccountService implements OnInit {
     return true;
   }
 
-  Login(username: string, password: string, token: string) {
+  Login(username: string, password: string, recaptchaToken: string) {
     let url = `${this._controllerPath}/login`;
 
     return this._http.post<LoginResponseModel>(url, {
       username: username,
       password: password
     }, {
-      headers: new HttpHeaders({ 'RecaptchaToken': token })
+      headers: new HttpHeaders({ 'RecaptchaToken': recaptchaToken })
     });
   }
 
@@ -74,23 +74,27 @@ export class AccountService implements OnInit {
     return sessionModel.token;
   }
 
-  RegisterVerificationCode(mobileNumber: string) {
+  RegisterVerificationCode(mobileNumber: string, recaptchaToken: string) {
     let url = `${this._controllerPath}/registerVerificationCode`;
 
     return this._http.post(url, {
       mobileNumber: mobileNumber
+    }, {
+      headers: new HttpHeaders({ 'RecaptchaToken': recaptchaToken })
     });
   }
 
-  ResetPasswordVerificationCode(mobileNumber: string) {
+  ResetPasswordVerificationCode(mobileNumber: string, recaptchaToken: string) {
     let url = `${this._controllerPath}/resetPasswordVerificationCode`;
 
     return this._http.post<LoginResponseModel>(url, {
       mobileNumber: mobileNumber
+    }, {
+      headers: new HttpHeaders({ 'RecaptchaToken': recaptchaToken })
     });
   }
 
-  Register(mobileNumber: string, password: string, name: string, family: string, verificationCode: string) {
+  Register(mobileNumber: string, password: string, name: string, family: string, verificationCode: string, recaptchaToken: string) {
     let url = `${this._controllerPath}/register`;
 
     return this._http.post(url, {
@@ -99,16 +103,20 @@ export class AccountService implements OnInit {
       name: name,
       family: family,
       verificationCode: verificationCode
+    }, {
+      headers: new HttpHeaders({ 'RecaptchaToken': recaptchaToken })
     });
   }
 
-  ResetPassword(mobileNumber: string, password: string, verificationCode: string) {
+  ResetPassword(mobileNumber: string, password: string, verificationCode: string, recaptchaToken: string) {
     let url = `${this._controllerPath}/resetPassword`;
 
     return this._http.post(url, {
       mobileNumber: mobileNumber,
       password: password,
       verificationCode: verificationCode
+    }, {
+      headers: new HttpHeaders({ 'RecaptchaToken': recaptchaToken })
     });
   }
 }
