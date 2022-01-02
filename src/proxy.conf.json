@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+    "target": "https://api.eltak.ir",
+    "secure": false,
+    "pathRewrite": {
+      "^/": "/"
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

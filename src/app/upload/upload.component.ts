@@ -1,5 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-upload',
@@ -35,7 +36,7 @@ export class UploadComponent implements OnInit {
     let formData = new FormData();
     formData.append('file', fileToUpload);
     formData.append('MetaData', 'salam');
-    this.http.post('https://localhost:44386/api/object', formData, {
+    this.http.post(`${environment.baseUrl}/object`, formData, {
       reportProgress: true,
       observe: 'events'
     })

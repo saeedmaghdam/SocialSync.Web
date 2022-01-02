@@ -38,8 +38,8 @@ import { DateDiffPipe } from './pipes/DateDiffPipe';
 import { TodoDialogComponent } from './dialogs/todo-dialog/todo-dialog.component';
 import { NoteDialogComponent } from './dialogs/note-dialog/note-dialog.component';
 import { StateDialogComponent } from './dialogs/state-dialog/state-dialog.component';
-import { LogMessageDialogComponent } from './dialogs/log-message-dialog/log-message-dialog.component';
-import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { LogMessageDialogComponent } from './log-message-dialog/log-message-dialog.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
