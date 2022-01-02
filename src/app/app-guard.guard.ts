@@ -17,8 +17,9 @@ export class AppGuard implements CanActivate, CanActivateChild {
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     var isAuthenticated = this._accountService.IsAuthenticated();
 
-    if (!isAuthenticated)
+    if (!isAuthenticated) {
       this._router.navigate(['/login']);
+    }
 
     return true;
   }
@@ -26,8 +27,9 @@ export class AppGuard implements CanActivate, CanActivateChild {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     var isAuthenticated = this._accountService.IsAuthenticated();
 
-    if (!isAuthenticated)
+    if (!isAuthenticated) {
       this._router.navigate(['/login']);
+    }
 
     return true;
   }

@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form">
+  <form class="form" [formGroup]="loginFormGroup" autocomplete="off">
     <div class="row">
       <div class="col-8 offset-2 col-md-4 offset-md-4">
         <h1>App Status</h1>
@@ -9,11 +9,8 @@
       <div class="col-8 offset-2 col-md-4 offset-md-4">
         <mat-form-field class="input" appearance="fill">
           <mat-label>Mobile Number</mat-label>
-          <input type="text" matInput [formControl]="usernameFormControl" placeholder="Enter your mobile number"
+          <input type="text" matInput formControlName="username" placeholder="Enter your mobile number"
             [disabled]="_loading">
-          <mat-error *ngIf="usernameFormControl.hasError('required')">
-            Mobile number is <strong>required</strong>
-          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -21,18 +18,23 @@
       <div class="col-8 offset-2 col-md-4 offset-md-4">
         <mat-form-field class="input" appearance="fill">
           <mat-label>Password</mat-label>
-          <input type="password" matInput [formControl]="passwordFormControl" placeholder="Enter your username"
+          <input type="password" matInput formControlName="password" placeholder="Enter your username"
             [disabled]="_loading">
-          <mat-error *ngIf="passwordFormControl.hasError('required')">
-            Password is <strong>required</strong>
-          </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="row">
       <div class="col-8 offset-2 col-md-4 offset-md-4">
-        <button mat-flat-button color="primary" (click)="login()"
-          [disabled]="!usernameFormControl.valid || !passwordFormControl.valid || _loading">Sign In</button>
+        <button mat-flat-button color="primary" (click)="Login()"
+          [disabled]="!loginFormGroup.valid || _loading">Sign In</button>
+      </div>
+    </div>
+    <div class="row" class="links">
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <span>Not a member? <a routerLink="/register" class="link">Create Account</a></span>
+      </div>
+      <div class="col-8 offset-2 col-md-4 offset-md-4">
+        <span>Forgot your password? <a routerLink="/resetPassword" class="link">Reset Password</a></span>
       </div>
     </div>
   </form>

@@ -50,7 +50,7 @@ export class AccountService implements OnInit {
       username: username,
       password: password
     }, {
-      headers: new HttpHeaders({'RecaptchaToken': token})
+      headers: new HttpHeaders({ 'RecaptchaToken': token })
     });
   }
 
@@ -61,8 +61,10 @@ export class AccountService implements OnInit {
   }
 
   GetToken() {
-    if (!this.IsAuthenticated())
-      this._router.navigate(['/login']);
+    if (!this.IsAuthenticated()) {
+      if (this._router.url != "/login" && this._router.url != "/register" && this._router.url != "/resetPassword")
+        this._router.navigate(['/login']);
+    }
 
     let session = localStorage.getItem('session');
     let sessionModel: SessionResponseModel = JSON.parse(session!);
@@ -70,5 +72,43 @@ export class AccountService implements OnInit {
       return null;
 
     return sessionModel.token;
+  }
+
+  RegisterVerificationCode(mobileNumber: string) {
+    let url = `${this._controllerPath}/registerVerificationCode`;
+
+    return this._http.post(url, {
+      mobileNumber: mobileNumber
+    });
+  }
+
+  ResetPasswordVerificationCode(mobileNumber: string) {
+    let url = `${this._controllerPath}/resetPasswordVerificationCode`;
+
+    return this._http.post<LoginResponseModel>(url, {
+      mobileNumber: mobileNumber
+    });
+  }
+
+  Register(mobileNumber: string, password: string, name: string, family: string, verificationCode: string) {
+    let url = `${this._controllerPath}/register`;
+
+    return this._http.post(url, {
+      mobileNumber: mobileNumber,
+      password: password,
+      name: name,
+      family: family,
+      verificationCode: verificationCode
+    });
+  }
+
+  ResetPassword(mobileNumber: string, password: string, verificationCode: string) {
+    let url = `${this._controllerPath}/resetPassword`;
+
+    return this._http.post(url, {
+      mobileNumber: mobileNumber,
+      password: password,
+      verificationCode: verificationCode
+    });
   }
 }

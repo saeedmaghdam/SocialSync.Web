@@ -43,6 +43,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { environment } from 'src/environments/environment';
     TodoDialogComponent,
     StateDialogComponent,
     LogMessageDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

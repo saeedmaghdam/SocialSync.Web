@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account/account.service';
 import { LoginResponseModel } from '../services/account/models/login-response-model';
@@ -17,28 +17,30 @@ export class LoginComponent implements OnInit {
   _router: Router;
   _sharedService: SharedService;
 
+  loginFormGroup!: FormGroup;
+
   _loading = false;
 
-  errorMessage!: string;
-
-  usernameFormControl = new FormControl('', [Validators.required]);
-  passwordFormControl = new FormControl('', [Validators.required]);
-
-  constructor(accountService: AccountService, router: Router, sharedService: SharedService, private recaptchaV3Service: ReCaptchaV3Service) {
+  constructor(private formBuilder: FormBuilder, accountService: AccountService, router: Router, sharedService: SharedService, private recaptchaV3Service: ReCaptchaV3Service) {
     this._accountService = accountService;
     this._router = router;
     this._sharedService = sharedService;
+
+    this.loginFormGroup = formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
   }
 
-  login() {
+  Login() {
     this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
         this._loading = true;
-
-        this._accountService.Login(this.usernameFormControl.value, this.passwordFormControl.value, token).subscribe((data) => {
+        console.log(this.loginFormGroup.get("username")?.value);
+        this._accountService.Login(this.loginFormGroup.get("username")?.value, this.loginFormGroup.get("password")?.value, token).subscribe((data) => {
           let model: LoginResponseModel = data;
           let session: SessionResponseModel = {
             expirationDate: model.data.expirationDate,
