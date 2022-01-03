@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { ApiPath } from 'src/app/apiPath';
 import { environment } from 'src/environments/environment';
 import { FullCreateRequestModel } from './models/full-create-request-model';
+import { FullUpdateRequestModel } from './models/full-update-request-model';
+import { ApplicationViewModel } from './view-models/application-view-model';
 import { DashboardDataViewModel } from './view-models/dashboard-data-view-model';
 
 @Injectable({
@@ -22,6 +24,12 @@ export class ApplicationService {
     this.Subject = new Subject<boolean>();
   }
 
+  GetById(id: string) {
+    let url = `${this._controllerPath}/${id}`;
+
+    return this._http.get<ApplicationViewModel>(url);
+  }
+
   GetDashboardData() {
     let url = `${this._controllerPath}/dashboardData`;
 
@@ -30,6 +38,12 @@ export class ApplicationService {
 
   FullCreate(model: FullCreateRequestModel) {
     let url = `${this._controllerPath}/fullCreate`;
+
+    return this._http.post(url, model);
+  }
+
+  FullUpdate(model: FullUpdateRequestModel) {
+    let url = `${this._controllerPath}/fullUpdate`;
 
     return this._http.post(url, model);
   }

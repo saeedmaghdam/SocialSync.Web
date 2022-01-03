@@ -25,4 +25,15 @@ export class ObjectService {
       window.open(fileURL);
     });
   }
+
+  DownloadImage(id: string) {
+    let url = `${this._controllerPath}/${id}`;
+
+    return this._http.get(url, {responseType: 'blob'}).subscribe((data) => {
+      var file = new Blob([data], { type: 'image/jpeg' })
+      var fileURL = URL.createObjectURL(file);
+
+      window.open(fileURL);
+    });
+  }
 }

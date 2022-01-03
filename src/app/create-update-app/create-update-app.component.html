@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container create-update-container">
   <div class="row">
     <div class="col-12 col-md-6 offset-md-3">
       <mat-stepper orientation="vertical" [linear]="true" #stepper>
@@ -14,7 +14,7 @@
                   Company's name is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="input" appearance="fill" class="fill">
+              <mat-form-field class="input" appearance="fill" class="fill" *ngIf="!_updateMode">
                 <mat-label>Url</mat-label>
                 <input type="text" matInput formControlName="url" placeholder="Enter company's url"
                   [disabled]="_loading">
@@ -66,7 +66,7 @@
                   </button>
                 </div>
               </div>
-              <mat-form-field class="input" appearance="fill" class="fill">
+              <mat-form-field class="input" appearance="fill" class="fill" *ngIf="!_updateMode">
                 <mat-label>Address</mat-label>
                 <input type="text" matInput formControlName="address" placeholder="Enter company's address"
                   [disabled]="_loading">
@@ -83,7 +83,7 @@
             <div class="container">
               <div class="employeesContainer">
                 <div formArrayName="employees">
-                  <div *ngFor="let employee of getEmployeesArray().controls; let i = index;">
+                  <div *ngFor="let employee of getEmployeesArray().controls; let i = index;" class="employee-container">
                     <div class="employeeBox">
                       <div [formGroupName]="i">
                         <mat-form-field class="input" appearance="fill" class="fill">
@@ -117,8 +117,17 @@
                           <input type="text" matInput formControlName="profileUrl"
                             placeholder="Enter employee's profile url address" [disabled]="_loading" autocomplete="off">
                         </mat-form-field>
-                        <app-upload (onUploadFinished)="uploadEmployeePicture($event, i)" title="Upload picture"
-                          accept=".jpeg,.jpg,.png,.bmp" showPreview="true"></app-upload>
+                        <div class="pictureUploadContainer">
+                          <button mat-icon-button color="primary"
+                            (click)="DownloadEmployeePicture(employee!.get('pictureId')!.value!)"
+                            title="Download resume" [disabled]="employee!.get('pictureId')!.value! == undefined || employee!.get('pictureId')!.value! == null || employee!.get('pictureId')!.value! == ''">
+                            <mat-icon>launch</mat-icon>
+                          </button>
+                          <div class="uploader">
+                            <app-upload (onUploadFinished)="uploadEmployeePicture($event, i)" title="Upload picture"
+                              accept=".jpeg,.jpg,.png,.bmp" showPreview="true"></app-upload>
+                          </div>
+                        </div>
                         <button mat-button color="warn" (click)="deleteEmployee(i)">
                           <mat-icon>delete</mat-icon>
                         </button>
@@ -143,7 +152,7 @@
           <form [formGroup]="applicationFormGroup" autocomplete="off">
             <ng-template matStepLabel>Fill out application information</ng-template>
             <div class="container">
-              <mat-form-field appearance="fill" class="fill">
+              <mat-form-field appearance="fill" class="fill" *ngIf="!_updateMode">
                 <mat-label>State</mat-label>
                 <mat-select formControlName="stateId">
                   <mat-option *ngFor="let item of stateEnum | enumToArray" [value]="item.key">
@@ -174,21 +183,35 @@
                   Salary is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
-              <app-upload (onUploadFinished)="uploadResume($event)" title="Upload Resume" accept=".pdf"
-                showPreview="false" class="fill"></app-upload>
-              <mat-error *ngIf="applicationFormGroup.controls['resumeId'].hasError('required')">
-                Resume file is <strong>required</strong>
-              </mat-error>
-              <app-upload (onUploadFinished)="uploadCoverLetter($event)" title="Upload Cover Letter" accept=".pdf"
-                showPreview="false" class="fill"></app-upload>
-              <mat-error *ngIf="applicationFormGroup.controls['coverLetterId'].hasError('required')">
-                Cover letter file is <strong>required</strong>
-              </mat-error>
-              <mat-form-field class="input" appearance="fill" class="fill">
+              <div class="resumeUploadContainer">
+                <button mat-icon-button color="primary" (click)="Download(applicationFormGroup.get('resumeId')!.value)"
+                  title="Download resume"
+                  [disabled]="applicationFormGroup.get('resumeId')!.value == undefined || applicationFormGroup.get('resumeId')!.value == null || applicationFormGroup.get('resumeId')!.value.trim() == ''">
+                  <mat-icon>launcher</mat-icon>
+                </button>
+                <app-upload (onUploadFinished)="uploadResume($event)" title="Upload Resume" accept=".pdf"
+                  showPreview="false" class="fill"></app-upload>
+                <mat-error *ngIf="applicationFormGroup.controls['resumeId'].hasError('required')">
+                  Resume file is <strong>required</strong>
+                </mat-error>
+              </div>
+              <div class="coverLetterUploadContainer">
+                <button mat-icon-button color="primary"
+                  (click)="Download(applicationFormGroup.get('coverLetterId')!.value)" title="Download cover letter"
+                  [disabled]="applicationFormGroup.get('coverLetterId')!.value == undefined || applicationFormGroup.get('coverLetterId')!.value == null || applicationFormGroup.get('coverLetterId')!.value.trim() == ''">
+                  <mat-icon>launcher</mat-icon>
+                </button>
+                <app-upload (onUploadFinished)="uploadCoverLetter($event)" title="Upload Cover Letter" accept=".pdf"
+                  showPreview="false" class="fill"></app-upload>
+                <mat-error *ngIf="applicationFormGroup.controls['coverLetterId'].hasError('required')">
+                  Cover letter file is <strong>required</strong>
+                </mat-error>
+              </div>
+              <mat-form-field class="input" appearance="fill" class="fill" *ngIf="!_updateMode">
                 <mat-label>Notes</mat-label>
                 <input type="text" matInput formControlName="notes" placeholder="Notes" [disabled]="_loading">
               </mat-form-field>
-              <div class="toDoContainer">
+              <div class="toDoContainer" *ngIf="!_updateMode">
                 <h3>To Do</h3>
                 <div formArrayName="toDo">
                   <div *ngFor="let item of getToDoArray().controls; let i = index;">
@@ -212,7 +235,8 @@
               </div>
               <div>
                 <hr />
-                <button mat-flat-button matStepperNext color="primary" (click)="submit()" class="fill">Submit</button>
+                <button mat-flat-button matStepperNext color="primary" (click)="SubmitCreateForm()" class="fill" *ngIf="!_updateMode">Submit</button>
+                <button mat-flat-button matStepperNext color="primary" (click)="SubmitUpdateForm()" class="fill" *ngIf="_updateMode">Submit</button>
                 <button mat-button matStepperPrevious class="fill">Back</button>
               </div>
             </div>
@@ -222,3 +246,6 @@
     </div>
   </div>
 </div>
+<button mat-fab color="primary" class="back-to-dashboard" routerLink="/dashboard">
+  <mat-icon>arrow_back</mat-icon>
+</button>

@@ -30,7 +30,7 @@ import { AuthInterceptor } from './auth.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { NewAppComponent } from './new-app/new-app.component';
+import { CreateUpdateAppComponent } from './create-update-app/create-update-app.component';
 import { EnumToArrayPipe } from './pipes/EnumToArrayPipe';
 import { UploadComponent } from './upload/upload.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
@@ -52,7 +52,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LoginComponent,
     MainComponent,
     DashboardComponent,
-    NewAppComponent,
+    CreateUpdateAppComponent,
     EnumToArrayPipe,
     DateDiffPipe,
     UploadComponent,
