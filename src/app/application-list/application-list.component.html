@@ -44,5 +44,11 @@
         </button>
       </div>
     </div>
+    <div *ngIf="application.employees.length > 0" class="employee-container">
+      <div *ngFor="let employee of application.employees" class="employee">
+        <img [src]="LoadImage(employee!.pictureId)" />
+        <h3><a [href]="employee.profileUrl" rel="nofollow noopener noreferrer" target="_blank">{{ employee.name }}</a><span class="role">({{ employee.role }})</span></h3>
+      </div>
+    </div>
   </div>
 </div>

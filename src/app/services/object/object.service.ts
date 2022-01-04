@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ApiPath } from 'src/app/apiPath';
 import { environment } from 'src/environments/environment';
 
@@ -35,5 +36,11 @@ export class ObjectService {
 
       window.open(fileURL);
     });
+  }
+
+  DownloadImageAsBlob(id: string): Observable<Blob> {
+    let url = `${this._controllerPath}/${id}`;
+
+    return this._http.get(url, {responseType: 'blob'});
   }
 }

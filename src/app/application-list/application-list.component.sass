@@ -40,3 +40,45 @@ ul.history
 
 ul li:first-child
   color: #1a7ba1
+
+.employee-container
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: flex-start
+  align-items: stretch
+  align-content: normal
+  border-top: 1px solid #e5e5e5
+  padding-top: 10px
+  overflow-x: scroll
+
+.employee-container .employee
+  display: block
+  flex-grow: 0
+  flex-shrink: 0
+  flex-basis: auto
+  align-self: auto
+  order: 0
+  width: 96px
+  text-align: center
+  margin-right: 5px
+
+.employee-container .employee img
+  width: 64px
+  height: 64px
+  border: 1px solid #ddd
+  border-radius: 4px
+  padding: 5px
+  margin-bottom: 7px
+
+.employee-container .employee a
+  text-decoration: none
+  color: #3f51b5
+  font-weight: 700
+  font-size: 12px
+
+.employee-container .employee .role
+  font-size: 11px
+  margin-left: 3px
+  display: block
+  margin-top: -10px

@@ -9,6 +9,12 @@ import { ApplicationService } from '../services/application/application.service'
 import { ApplicationHistoryItemViewModel, ApplicationToDoItemViewModel, ApplicationViewModel } from '../services/application/view-models/application-view-model';
 import { ObjectService } from '../services/object/object.service';
 import { SharedService } from '../services/shared/shared.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
+class EmployeeImage {
+  ObjectId!: String;
+  Image!: Blob;
+}
 
 @Component({
   selector: 'app-application-list',
@@ -25,7 +31,9 @@ export class ApplicationListComponent implements OnInit {
   private _sharedService: SharedService;
   private _dialog: MatDialog;
 
-  constructor(objectService: ObjectService, applicationService: ApplicationService, sharedService: SharedService, dialog: MatDialog) {
+  _images: Array<EmployeeImage> = new Array<EmployeeImage>();
+
+  constructor(objectService: ObjectService, applicationService: ApplicationService, sharedService: SharedService, dialog: MatDialog, private sanitizer: DomSanitizer) {
     this._objectService = objectService;
     this._applicationService = applicationService;
     this._sharedService = sharedService;
@@ -33,10 +41,49 @@ export class ApplicationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.applications);
+    if (this.applications != undefined && this.applications != null) {
+      for (let i = 0; i < this.applications.length; i++) {
+        let application = this.applications[i];
+        if (application.employees != undefined && application.employees != null && application.employees.length > 0) {
+          for (let j = 0; j < application.employees.length; j++) {
+            let employee = application.employees[j];
+            if (employee.pictureId != undefined && employee.pictureId != null && employee.pictureId.trim().length > 0)
+              this.DownloadImageAsBlob(employee.pictureId);
+          }
+        }
+      }
+    }
   }
 
   Download(objectId: string) {
     this._objectService.Download(objectId);
+  }
+
+  DownloadImageAsBlob(objectId: string) {
+    this._objectService.DownloadImageAsBlob(objectId).subscribe((blob) => {
+      var file = new Blob([blob], { type: 'image/jpeg' });
+      let image = this._images.find(x => x.ObjectId == objectId);
+      if (image == undefined || image == null) {
+        image = new EmployeeImage();
+        image.ObjectId = objectId;
+        image.Image = file;
+        this._images.push(image)
+      }
+    });
+  }
+
+  LoadImage(objectId: string) {
+    if (objectId == undefined || objectId == null || objectId == "")
+      return "assets/images/profile.jpg";
+
+    let image = this._images.find(x => x.ObjectId == objectId);
+    if (image == undefined || image == null)
+      return "assets/images/profile.jpg";
+
+    let url = URL.createObjectURL(image.Image);
+    let imageUrl = this.sanitizer.bypassSecurityTrustUrl(url);
+    return imageUrl;
   }
 
   UnDoneToDo(toDo: ApplicationToDoItemViewModel[]) {
@@ -141,4 +188,3 @@ export class ApplicationListComponent implements OnInit {
 
   }
 }
-

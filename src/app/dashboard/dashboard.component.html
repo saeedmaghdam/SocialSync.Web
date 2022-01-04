@@ -6,7 +6,7 @@
         <h2>Wishlist</h2>
       </div>
       <mat-card>
-        <app-application-list [applications]="getWishlistApplications()"
+        <app-application-list *ngIf="getWishlistApplications() != undefined && getWishlistApplications() != null && getWishlistApplications().length > 0" [applications]="getWishlistApplications()"
           [totalApplicationsCount]="getTotalWishlistApplications()" emptyMessage="No Jobs on your wishlist yet">
         </app-application-list>
       </mat-card>
@@ -17,7 +17,7 @@
         <h2>Applied</h2>
       </div>
       <mat-card>
-        <app-application-list [applications]="getAppliedApplications()"
+        <app-application-list *ngIf="getAppliedApplications() != undefined && getAppliedApplications() != null && getAppliedApplications().length > 0" [applications]="getAppliedApplications()"
           [totalApplicationsCount]="getTotalAppliedApplications()" emptyMessage="No jobs applied to yet">
         </app-application-list>
       </mat-card>
@@ -28,7 +28,7 @@
         <h2>Interview</h2>
       </div>
       <mat-card>
-        <app-application-list [applications]="getInterviewApplications()"
+        <app-application-list *ngIf="getInterviewApplications() != undefined && getInterviewApplications() != null && getInterviewApplications().length > 0" [applications]="getInterviewApplications()"
           [totalApplicationsCount]="getTotalInterviewApplications()" emptyMessage="No jobs in interview phase yet">
         </app-application-list>
       </mat-card>
@@ -39,7 +39,7 @@
         <h2>Offer</h2>
       </div>
       <mat-card>
-        <app-application-list [applications]="getOfferApplications()"
+        <app-application-list *ngIf="getOfferApplications() != undefined && getOfferApplications() != null && getOfferApplications().length > 0" [applications]="getOfferApplications()"
           [totalApplicationsCount]="getTotalOfferApplications()" emptyMessage="No offers yet"></app-application-list>
       </mat-card>
     </div>
@@ -49,7 +49,7 @@
         <h2>Rejected</h2>
       </div>
       <mat-card>
-        <app-application-list [applications]="getRejectedApplications()"
+        <app-application-list *ngIf="getRejectedApplications() != undefined && getRejectedApplications() != null && getRejectedApplications().length > 0" [applications]="getRejectedApplications()"
           [totalApplicationsCount]="getTotalRejectedApplications()" emptyMessage="No rejections"></app-application-list>
       </mat-card>
     </div>
