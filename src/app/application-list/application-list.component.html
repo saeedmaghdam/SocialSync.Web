@@ -1,6 +1,6 @@
-<div *ngIf="applications?.length == 0" class="no-items">{{ emptyMessage }}</div>
+<div *ngIf="filteredApplications?.length == 0" class="no-items">{{ emptyMessage }}</div>
 
-<div *ngFor="let application of applications; let i = index">
+<div *ngFor="let application of filteredApplications; let i = index">
   <div class="application-container">
     <button mat-icon-button color="primary" (click)="OpenStateDialog(application.id, application.stateId)" title="Update application" class="right">
       <mat-icon>flash_on</mat-icon>
@@ -9,10 +9,10 @@
     <h3>{{ application.jobTitle }} - ({{ application.recordInsertDate | dateDiff }})</h3>
     <h3>{{ application.company.address }}</h3>
     <div>
-      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download resume">
+      <button mat-icon-button color="primary" (click)="Download(application.resumeId)" title="Download resume" [disabled]="application == undefined || application == null || application.resumeId == undefined || application.resumeId == null || application.resumeId.trim().length == 0">
         <mat-icon>assignment_ind</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="Download(application.coverLetterId)" title="Download cover letter">
+      <button mat-icon-button color="primary" (click)="Download(application.coverLetterId)" title="Download cover letter"  [disabled]="application == undefined || application == null || application.coverLetterId == undefined || application.coverLetterId == null || application.coverLetterId.trim().length == 0">
         <mat-icon>assignment</mat-icon>
       </button>
       <a [routerLink]="['/dashboard/app/update', application.id]" mat-icon-button color="primary" (click)="Update(application.id)" title="Update application" class="update">

@@ -26,6 +26,8 @@ export class ApplicationListComponent implements OnInit {
   @Input() totalApplicationsCount!: number;
   @Input() emptyMessage!: string;
 
+  filteredApplications!: ApplicationViewModel[];
+
   private _objectService: ObjectService;
   private _applicationService: ApplicationService;
   private _sharedService: SharedService;
@@ -38,13 +40,32 @@ export class ApplicationListComponent implements OnInit {
     this._applicationService = applicationService;
     this._sharedService = sharedService;
     this._dialog = dialog;
+
+    this._applicationService.SearchSubject.subscribe((keyword) => {
+      if (keyword.length == 0)
+        this.filteredApplications = this.applications;
+
+      this.filteredApplications = this.applications.filter(x =>
+        (x.company != undefined && x.company != null && x.company.name != undefined && x.company.name != null && x.company.name.toLowerCase().indexOf(keyword) != -1)
+        || (x.company != undefined && x.company != null && x.company.url != undefined && x.company.url != null && x.company.url.toLowerCase().indexOf(keyword) != -1)
+        || (x.company != undefined && x.company != null && x.company.emails != undefined && x.company.emails != null && x.company.emails.filter(z => z != undefined && z != null && z.toLowerCase().indexOf(keyword) != -1).length > 0)
+        || (x.company != undefined && x.company != null && x.company.phoneNumbers != undefined && x.company.phoneNumbers != null && x.company.phoneNumbers.filter(z => z != undefined && z != null && z.toLowerCase().indexOf(keyword) != -1).length > 0)
+        || (x.jobTitle != undefined && x.jobTitle != null && x.jobTitle.toLowerCase().indexOf(keyword) != -1)
+        || (x.notes != undefined && x.notes != null && x.notes.toLowerCase().indexOf(keyword) != -1)
+        || (x.salary != undefined && x.salary != null && x.salary.toLowerCase().indexOf(keyword) != -1)
+        || (x.employees != undefined && x.employees != null && x.employees.filter(z => z.name != undefined && z.name != null && z.name.toLowerCase().indexOf(keyword) != -1).length > 0)
+        || (x.employees != undefined && x.employees != null && x.employees.filter(z => z.email != undefined && z.email != null && z.email.toLowerCase().indexOf(keyword) != -1).length > 0)
+        || (x.employees != undefined && x.employees != null && x.employees.filter(z => z.phoneNumber != undefined && z.phoneNumber != null && z.phoneNumber.toLowerCase().indexOf(keyword) != -1).length > 0)
+        || (x.toDo != undefined && x.toDo != null && x.toDo.filter(z => z.title != undefined && z.title != null && z.title.toLowerCase().indexOf(keyword) != -1).length > 0)
+      )
+    });
   }
 
   ngOnInit(): void {
-    console.log(this.applications);
-    if (this.applications != undefined && this.applications != null) {
-      for (let i = 0; i < this.applications.length; i++) {
-        let application = this.applications[i];
+    this.filteredApplications = this.applications;
+    if (this.filteredApplications != undefined && this.filteredApplications != null) {
+      for (let i = 0; i < this.filteredApplications.length; i++) {
+        let application = this.filteredApplications[i];
         if (application.employees != undefined && application.employees != null && application.employees.length > 0) {
           for (let j = 0; j < application.employees.length; j++) {
             let employee = application.employees[j];

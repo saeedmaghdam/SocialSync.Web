@@ -13,6 +13,7 @@ import { DashboardDataViewModel } from './view-models/dashboard-data-view-model'
 })
 export class ApplicationService {
   Subject: Subject<boolean>;
+  SearchSubject: Subject<string>;
 
   private _http: HttpClient;
 
@@ -22,6 +23,7 @@ export class ApplicationService {
     this._http = http;
 
     this.Subject = new Subject<boolean>();
+    this.SearchSubject = new Subject<string>();
   }
 
   GetById(id: string) {

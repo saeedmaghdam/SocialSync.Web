@@ -8,6 +8,10 @@
   <button mat-button routerLink="/" (click)="sidenav.close()">
     <span>App Status</span>
   </button>
+
+  <mat-form-field appearance="fill" *ngIf="_router.url == '/dashboard'">
+    <input type=[search] matInput placeholder="Search Applications" [(ngModel)]="searchKeyword" (keyup)="Search()">
+  </mat-form-field>
 </mat-toolbar>
 <mat-sidenav-container fxFlexFill class="sidenav-container">
 
