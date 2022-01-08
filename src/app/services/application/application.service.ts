@@ -8,12 +8,31 @@ import { FullUpdateRequestModel } from './models/full-update-request-model';
 import { ApplicationViewModel } from './view-models/application-view-model';
 import { DashboardDataViewModel } from './view-models/dashboard-data-view-model';
 
+export class ApplicationSubjectDataModel {
+  ListName: string;
+  Applications: ApplicationViewModel[];
+  ApplicationsTotalCount: number;
+
+  constructor(listName: string, applications: ApplicationViewModel[], applicationsTotalCount: number){
+    this.ListName = listName;
+    this.Applications = applications;
+    this.ApplicationsTotalCount = applicationsTotalCount;
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
   Subject: Subject<boolean>;
+  ApplicationListSubject: Subject<ApplicationSubjectDataModel>;
   SearchSubject: Subject<string>;
+
+  WishListTotalApplications: number = 0;
+  AppliedTotalApplications: number = 0;
+  InterviewTotalApplications: number = 0;
+  OfferedTotalApplications: number = 0;
+  RejectedTotalApplications: number = 0;
 
   private _http: HttpClient;
 
@@ -23,6 +42,7 @@ export class ApplicationService {
     this._http = http;
 
     this.Subject = new Subject<boolean>();
+    this.ApplicationListSubject = new Subject<ApplicationSubjectDataModel>();
     this.SearchSubject = new Subject<string>();
   }
 

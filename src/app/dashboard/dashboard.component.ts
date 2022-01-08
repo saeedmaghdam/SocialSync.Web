@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationService } from '../services/application/application.service';
-import { DashboardDataViewModelData } from '../services/application/view-models/dashboard-data-view-model';
+import { ApplicationService, ApplicationSubjectDataModel } from '../services/application/application.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +9,11 @@ import { DashboardDataViewModelData } from '../services/application/view-models/
 export class DashboardComponent implements OnInit {
   private _applicationService: ApplicationService;
 
-  _dashboardData!: DashboardDataViewModelData;
+  wishListTotalApplications: number = 0;
+  appliedTotalApplications: number = 0;
+  interviewTotalApplications: number = 0;
+  offeredTotalApplications: number = 0;
+  rejectedTotalApplications: number = 0;
 
   constructor(applicationService: ApplicationService) {
     this._applicationService = applicationService;
@@ -26,48 +29,17 @@ export class DashboardComponent implements OnInit {
 
   getDashboardData() {
     this._applicationService.GetDashboardData().subscribe((data) => {
-      this._dashboardData = data.data;
+      this.wishListTotalApplications = data.data.wishlist.totalApplications;
+      this.appliedTotalApplications = data.data.applied.totalApplications;
+      this.interviewTotalApplications = data.data.interview.totalApplications;
+      this.offeredTotalApplications = data.data.offer.totalApplications;
+      this.rejectedTotalApplications = data.data.rejected.totalApplications;
+
+      this._applicationService.ApplicationListSubject.next(new ApplicationSubjectDataModel("WishList", data.data.wishlist.applications, data.data.wishlist.totalApplications));
+      this._applicationService.ApplicationListSubject.next(new ApplicationSubjectDataModel("Applied", data.data.applied.applications, data.data.applied.totalApplications));
+      this._applicationService.ApplicationListSubject.next(new ApplicationSubjectDataModel("Interview", data.data.interview.applications, data.data.interview.totalApplications));
+      this._applicationService.ApplicationListSubject.next(new ApplicationSubjectDataModel("Offered", data.data.offer.applications, data.data.offer.totalApplications));
+      this._applicationService.ApplicationListSubject.next(new ApplicationSubjectDataModel("Rejected", data.data.rejected.applications, data.data.rejected.totalApplications));
     })
   }
-
-  getWishlistApplications() {
-    return this._dashboardData?.wishlist.applications;
-  }
-
-  getTotalWishlistApplications() {
-    return this._dashboardData?.wishlist.totalApplications;
-  }
-
-  getAppliedApplications() {
-    return this._dashboardData?.applied.applications;
-  }
-
-  getTotalAppliedApplications() {
-    return this._dashboardData?.applied.totalApplications;
-  }
-
-  getInterviewApplications() {
-    return this._dashboardData?.interview.applications;
-  }
-
-  getTotalInterviewApplications() {
-    return this._dashboardData?.interview.totalApplications;
-  }
-
-  getOfferApplications() {
-    return this._dashboardData?.offer.applications;
-  }
-
-  getTotalOfferApplications() {
-    return this._dashboardData?.offer.totalApplications;
-  }
-
-  getRejectedApplications() {
-    return this._dashboardData?.rejected.applications;
-  }
-
-  getTotalRejectedApplications() {
-    return this._dashboardData?.rejected.totalApplications;
-  }
-
 }

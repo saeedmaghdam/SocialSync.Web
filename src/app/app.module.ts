@@ -45,6 +45,7 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ApplicationService } from './services/application/application.service';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     {
       provide: RECAPTCHA_V3_SITE_KEY,
       useValue: environment.recaptcha.siteKey,
-    }
+    },
+    ApplicationService
   ],
   bootstrap: [AppComponent]
 })
