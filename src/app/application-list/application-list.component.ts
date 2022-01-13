@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { LogMessageDialogComponent } from '../log-message-dialog/log-message-dialog.component';
+import { LogMessageDialogComponent } from '../dialogs/log-message-dialog/log-message-dialog.component';
 import { NoteDialogComponent } from '../dialogs/note-dialog/note-dialog.component';
 import { StateDialogComponent } from '../dialogs/state-dialog/state-dialog.component';
 import { TodoDialogComponent } from '../dialogs/todo-dialog/todo-dialog.component';

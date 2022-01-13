@@ -36,7 +36,7 @@
       <ul class="history">
         <li *ngFor="let historyItem of application.history | slice:0:3">{{ historyItem.recordInsertDate |
           date:'yyyy-MM-dd' }} {{ historyItem.recordInsertDate |
-          date:'shortTime' }} - {{ historyItem.description }}</li>
+          date:'shortTime' }} {{ historyItem.recordInsertDate | dateDiff }} - {{ historyItem.description }}</li>
       </ul>
       <div class="view-more-container">
         <button *ngIf="application.history.length > 3" (click)="OpenLogMessagesDialog(application.history)" mat-button color="primary" class="view-more">
@@ -47,7 +47,7 @@
     <div *ngIf="application.employees.length > 0" class="employee-container">
       <div *ngFor="let employee of application.employees" class="employee">
         <img [src]="LoadImage(employee!.pictureId)" />
-        <h3><a [href]="employee.profileUrl" rel="nofollow noopener noreferrer" target="_blank">{{ employee.name }}</a><span class="role">({{ employee.role }})</span></h3>
+        <h3><a [href]="employee.profileUrl" rel="nofollow noopener noreferrer" target="_blank">{{ employee.name }}</a><span class="role" *ngIf="employee.role != undefined && employee.role != null && employee.role.trim() != ''">({{ employee.role }})</span></h3>
       </div>
     </div>
   </div>
