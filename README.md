@@ -1,27 +1,50 @@
+
+  
 # AppStatus.Web
+> Application Tracking System's web UI project.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+AppStatus.Web is frontend project of AppStatus.
+[AppStatus Live Version](https://google.com)
 
-## Development server
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/1.jpeg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/2.jpeg)
 
-## Code scaffolding
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/3.jpeg)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/4.jpeg)
 
-## Build
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/5.jpeg)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/6.jpeg)
 
-## Running unit tests
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/7.jpeg)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/8.jpeg)
 
-## Running end-to-end tests
+![APIs](https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/docs/9.jpeg)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Meta
+Saeed Aghdam – [Linkedin][linkedin]
 
-## Further help
+Distributed under the MIT license. See [``LICENSE``][github-license] for more information.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[https://github.com/saeedmaghdam/](https://github.com/saeedmaghdam/)
+
+## Contributing
+
+1. Fork it (<https://github.com/saeedmaghdam/AppStatus.Web/fork>)
+2. Create your feature branch (`git checkout -b feature/your-branch-name`)
+3. Commit your changes (`git commit -am 'Add a short message describes new feature'`)
+4. Push to the branch (`git push origin feature/your-branch-name`)
+
+5. Create a new Pull Request
+
+<!-- Markdown link & img dfn's -->
+
+[linkedin]:https://www.linkedin.com/in/saeedmaghdam/
+[nuget-page]:https://www.nuget.org/packages/AppStatus.Web
+[github]: https://github.com/saeedmaghdam/
+[github-page]: https://github.com/saeedmaghdam/AppStatus.Web/
+[github-license]: https://raw.githubusercontent.com/saeedmaghdam/AppStatus.Web/master/LICENSE
+[CHANGELOG.md]: https://github.com/saeedmaghdam/AppStatus.Api/blob/master/CHANGELOG.md
