@@ -5,6 +5,7 @@ import { State } from 'src/app/constants/state.enum';
 export interface StateDialogData {
   stateId: number;
   logMessage: string;
+  dateTime: Date;
 }
 
 @Component({
@@ -13,9 +14,6 @@ export interface StateDialogData {
   styleUrls: ['./state-dialog.component.sass']
 })
 export class StateDialogComponent implements OnInit {
-
-  logMessage!: string;
-
   stateEnum = State;
 
   constructor(public dialogRef: MatDialogRef<StateDialogComponent>,
@@ -23,6 +21,7 @@ export class StateDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.data.dateTime = new Date();
   }
 
   Submit() {

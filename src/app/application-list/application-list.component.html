@@ -34,9 +34,9 @@
     <div *ngIf="application.history.length > 0">
       <span class="history">History</span>
       <ul class="history">
-        <li *ngFor="let historyItem of application.history | slice:0:3">{{ historyItem.recordInsertDate |
-          date:'yyyy-MM-dd' }} {{ historyItem.recordInsertDate |
-          date:'shortTime' }} {{ historyItem.recordInsertDate | dateDiff }} - {{ historyItem.description }}</li>
+        <li *ngFor="let historyItem of application.history | slice:0:3">{{ historyItem.logDateTime |
+          date:'yyyy-MM-dd' }} {{ historyItem.logDateTime |
+          date:'shortTime' }} {{ historyItem.logDateTime | dateDiff }} - {{ historyItem.description }}</li>
       </ul>
       <div class="view-more-container">
         <button *ngIf="application.history.length > 3" (click)="OpenLogMessagesDialog(application.history)" mat-button color="primary" class="view-more">

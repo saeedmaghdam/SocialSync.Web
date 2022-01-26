@@ -17,6 +17,9 @@ import { MatBadgeModule } from '@angular/material/badge'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+
+import { NgxMatDatetimePickerModule, NgxMatDateAdapter, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -82,6 +85,10 @@ import { ApplicationService } from './services/application/application.service';
     MatDialogModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    MatDatepickerModule,
+
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
 
     ReactiveFormsModule,
     FormsModule,
@@ -107,7 +114,7 @@ import { ApplicationService } from './services/application/application.service';
       provide: RECAPTCHA_V3_SITE_KEY,
       useValue: environment.recaptcha.siteKey,
     },
-    ApplicationService
+    ApplicationService,
   ],
   bootstrap: [AppComponent]
 })

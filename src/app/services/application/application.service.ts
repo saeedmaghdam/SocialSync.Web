@@ -95,12 +95,13 @@ export class ApplicationService {
     });
   }
 
-  PatchState(id: string, stateId: number, logMessage: string) {
+  PatchState(id: string, stateId: number, logMessage: string, dateTime: Date) {
     let url = `${this._controllerPath}/${id}/state`;
 
     return this._http.patch(url, {
       stateId: stateId,
-      logMessage: logMessage
+      logMessage: logMessage,
+      dateTime: dateTime
     });
   }
 

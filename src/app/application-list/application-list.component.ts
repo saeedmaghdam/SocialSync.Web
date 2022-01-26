@@ -192,13 +192,15 @@ export class ApplicationListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      debugger;
+      
       if (result == undefined)
         return;
 
       if ((result.logMessage == undefined || result.logMessage == null || result.logMessage.trim() == "") && result.stateId == stateId)
         return;
 
-      this._applicationService.PatchState(applicationId, result.stateId, result.logMessage).subscribe(() => {
+      this._applicationService.PatchState(applicationId, result.stateId, result.logMessage, result.dateTime).subscribe(() => {
         this._applicationService.Subject.next(true);
         this._sharedService.toastSuccess("State updated successfully.")
       });

@@ -24,6 +24,7 @@ export class ApplicationViewModel {
 export class ApplicationHistoryItemViewModel {
   id!: string;
   recordInsertDate!: Date;
+  logDateTime!: Date;
   description!: string;
 }
 
