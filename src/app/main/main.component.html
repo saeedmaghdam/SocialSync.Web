@@ -6,7 +6,7 @@
   </div>
 
   <button mat-button routerLink="/" (click)="sidenav.close()">
-    <span>App Status</span>
+    <span>Template</span>
   </button>
 
   <mat-form-field appearance="fill" *ngIf="_router.url == '/dashboard'">
@@ -19,13 +19,13 @@
     <div fxLayout="column">
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard">Dashboard</a>
       <hr />
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/wishlist" disabled="true">Wishlist</a>
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/applied" disabled="true">Applied</a>
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/interview" disabled="true">Interview</a>
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/offer" disabled="true">Offer</a>
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/rejected" disabled="true">Rejected</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 1</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 2</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 3</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 4</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 5</a>
       <hr/>
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/create">New Application</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/create">Item 6</a>
       <hr/>
       <a mat-button (click)="sidenav.close(); Logout();" class="red">Logout</a>
     </div>

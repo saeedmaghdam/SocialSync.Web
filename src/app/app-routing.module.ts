@@ -6,7 +6,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { LoggedInAppGuard } from './logged-in-app-guard.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import { CreateUpdateAppComponent } from './create-update-app/create-update-app.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -17,9 +16,7 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, canActivateChild: [AppGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
-      { path: 'dashboard/app/create', component: CreateUpdateAppComponent, pathMatch: 'full' },
-      { path: 'dashboard/app/update/:id', component: CreateUpdateAppComponent, pathMatch: 'full' }
+      { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' }
     ]
   },
 ];

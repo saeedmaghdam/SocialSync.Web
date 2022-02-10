@@ -4,10 +4,9 @@
 
 export const environment = {
   production: false,
-  // baseUrl: 'https://localhost:5001/api',
-  baseUrl: 'https://api-ats.deralgo.com/api',
+  baseUrl: 'https://localhost:5001/api',
   recaptcha: {
-    siteKey: '6LdyXuMdAAAAAG8yEBXM6KbdZyIiTF9_K2M7mMg1',
+    siteKey: 'RECAPTCHA_KEY',
   }
 };
 

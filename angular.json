@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AppStatus.Web": {
+    "Dashboard.Web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AppStatus.Web:build:production"
+              "browserTarget": "Dashboard.Web:build:production"
             },
             "development": {
-              "browserTarget": "AppStatus.Web:build:development"
+              "browserTarget": "Dashboard.Web:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AppStatus.Web:build"
+            "browserTarget": "Dashboard.Web:build"
           }
         },
         "test": {
@@ -120,5 +120,5 @@
       }
     }
   },
-  "defaultProject": "AppStatus.Web"
+  "defaultProject": "Dashboard.Web"
 }
