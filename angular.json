@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Dashboard.Web": {
+    "SocialSync.Web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Dashboard.Web:build:production"
+              "browserTarget": "SocialSync.Web:build:production"
             },
             "development": {
-              "browserTarget": "Dashboard.Web:build:development"
+              "browserTarget": "SocialSync.Web:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Dashboard.Web:build"
+            "browserTarget": "SocialSync.Web:build"
           }
         },
         "test": {
@@ -120,5 +120,5 @@
       }
     }
   },
-  "defaultProject": "Dashboard.Web"
+  "defaultProject": "SocialSync.Web"
 }

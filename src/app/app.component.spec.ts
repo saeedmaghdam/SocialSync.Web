@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Dashboard.Web'`, () => {
+  it(`should have as title 'SocialSync.Web'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Dashboard.Web');
+    expect(app.title).toEqual('SocialSync.Web');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Dashboard.Web app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('SocialSync.Web app is running!');
   });
 });
