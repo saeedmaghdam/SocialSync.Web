@@ -19,18 +19,27 @@
     <div fxLayout="column">
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard">Dashboard</a>
       <hr />
-      <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 1</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/Tasks" disabled="true">Item 1</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 2</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 3</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 4</a>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard" disabled="true">Item 5</a>
       <hr/>
       <a mat-button (click)="sidenav.close()" routerLink="/dashboard/app/create">Item 6</a>
+      <a mat-button (click)="sidenav.close()" routerLink="/dashboard/Tasks">Tasks</a>
       <hr/>
       <a mat-button (click)="sidenav.close(); Logout();" class="red">Logout</a>
     </div>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
-    <router-outlet></router-outlet>
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <br>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+      
+ 
   </mat-sidenav-content>
 </mat-sidenav-container>

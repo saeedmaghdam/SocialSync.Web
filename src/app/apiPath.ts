@@ -1,5 +1,6 @@
 export enum ApiPath {
   Account = '/account',
   Application = '/application',
-  Object = '/object'
+  Object = '/object',
+  Catalog = '/catalog'
 }

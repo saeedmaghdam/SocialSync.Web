@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:5001/api',
+  baseUrl: 'https://ss-api.eltak.ir/api',
   recaptcha: {
-    siteKey: 'RECAPTCHA_KEY',
+    siteKey: '6Lcqe84eAAAAAM9qAVSwOslHLCo6mhtYBLPZuzcn',
   }
 };
 

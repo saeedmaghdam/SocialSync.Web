@@ -7,6 +7,7 @@ import { LoggedInAppGuard } from './logged-in-app-guard.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './register/register.component';
+import { TasksComponent } from './dashboard/tasks/tasks.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAppGuard], pathMatch: 'full' },
@@ -17,6 +18,12 @@ const routes: Routes = [
     path: '', component: MainComponent, canActivateChild: [AppGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' }
+    ]
+  },
+  {
+    path: '', component: MainComponent, canActivateChild: [AppGuard],
+    children: [
+      { path: 'dashboard/Tasks', component: TasksComponent, pathMatch: 'full' }
     ]
   },
 ];

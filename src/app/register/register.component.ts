@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
   }
 
   SendVerificationCode() {
+    debugger
     if (!this.registrationFormGroup.get("mobileNumber")?.valid)
       return
 
