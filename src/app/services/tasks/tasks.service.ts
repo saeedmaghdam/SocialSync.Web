@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, tap } from 'rxjs/operators'
 import { ApiPath } from 'src/app/apiPath';
 import { environment } from '../../../environments/environment';
 import { SharedService } from '../shared/shared.service';
@@ -27,10 +28,10 @@ export class TasksService implements OnInit {
 
   }
  
-  TasksList(username: string, password: string ) {
-    let url = `${this._controllerPath}/tasks`;
+  TasksList(sourceType: number, sourceId: string ) {
+    debugger
+    let url = `${this._controllerPath}/task?sourceType=${sourceType}&sourceId=${sourceId}`;
 
-    return this._http.get(url, {} );
+    return this._http.get(url, {} ).pipe(tap(data => data));
     }
-  
 }

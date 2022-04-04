@@ -1,3 +1,4 @@
+ 
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
@@ -7,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SharedService {
 
   constructor(private toastr : ToastrService) { }
+ 
 
   toastError(message: string, title: string = 'Error') {
     this.toastr.error(message, title);

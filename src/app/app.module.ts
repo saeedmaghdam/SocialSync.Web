@@ -19,10 +19,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatTableModule } from '@angular/material/table'
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { NgxMatDatetimePickerModule, NgxMatDateAdapter, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
-import { TasksComponent } from './dashboard/tasks/tasks.component'
+import { TasksComponent } from './dashboard/tasks/tasks.component' 
 
 import { LoginComponent } from './login/login.component'
 import { AppGuard } from './app-guard.guard';
@@ -56,7 +57,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UploadComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    TasksComponent
+    TasksComponent 
   ],
   imports: [
     BrowserModule,
@@ -76,6 +77,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatButtonToggleModule,
     MatDatepickerModule,
     MatTableModule,
+    MatExpansionModule,
 
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
