@@ -41,6 +41,7 @@ export class TasksComponent implements OnInit {
   _sharedService: SharedService;
   _paginationService: PaginationService;
   tasktotalCount: number = 0;
+  taskdataSource: any; 
   output: any; 
   viewContent = true;
   createeditContent = false;
@@ -51,15 +52,13 @@ export class TasksComponent implements OnInit {
     this._paginationService = paginationService;
 
   }
- 
   
-
   displayedColumns: string[] = ['action', 'product', 'selector'];
-  taskdataSource = eaadata.data;
+  //taskdataSource = eaadata.data;
   
   ngOnInit(): void {
     debugger
-    //this.GetTaskList();
+    this.GetTaskList();
 }
 
 
@@ -69,7 +68,7 @@ GetTaskList() {
         .subscribe((result: any) => {
           debugger;
             console.log(result.headers);
-            this.taskdataSource=result;
+            this.taskdataSource=result.data;
             //this.tasktotalCount = JSON.parse(result.headers.get('X-Pagination')).totalCount;
  
             //this.taskdataSource = new MatTableDataSource<TasksResponseModel>(result.body.value);
@@ -79,53 +78,5 @@ GetTaskList() {
         });
 }
 
-ShowViewContent(){
-  this.viewContent = true;
-  this.createeditContent = false;
-}
-
-ShowCreateEditContent(){
-  this.viewContent = false;
-  this.createeditContent = true;
-}
-
-onSubmit() {
-
-  console.log('Submit');
- 
-  // this._tasksService.SaveTask(this.MemberModel).subscribe(
-  //     response => 
-  //     {
-  //         this.output = response
-  //         if (this.output.StatusCode == "409") {
-  //             alert('Member Already Exists');
-  //         }
-  //         else if (this.output.StatusCode == "200") {
-  //             alert('Member Added Successfully');
-  //             this._Route.navigate(['/Member/All']);
-  //         }
-  //         else {
-  //             alert('Something Went Wrong');
-  //         }
-  //     });
-
- 
-}
-
-// payonPageSwitch(event: PageEvent) {
-//   this._paginationService.change(event);
-//   this.GetTaskList();
-// }
-// applyFilter(filterValue: string) {
-//     console.log(filterValue);
-//     console.log("###");
-
-//     filterValue = filterValue.toLowerCase();
-//     this.taskdataSource.filter((it: any) => 
-//         {
-//         var d = it.toLowerCase().includes(filterValue);
-//         console.log(d);
-//     }); 
-// }
 
 }

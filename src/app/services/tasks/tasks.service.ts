@@ -30,7 +30,7 @@ export class TasksService implements OnInit {
  
   TasksList(sourceType: number, sourceId: string ) {
     debugger
-    let url = `${this._controllerPath}/task?sourceType=${sourceType}&sourceId=${sourceId}`;
+    let url = `${this._controllerPath}/task?sourceType=1&sourceId=google.com`;
 
     return this._http.get(url, {} ).pipe(tap(data => data));
     }
