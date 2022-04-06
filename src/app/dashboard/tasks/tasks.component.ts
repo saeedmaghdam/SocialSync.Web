@@ -53,7 +53,7 @@ export class TasksComponent implements OnInit {
 
   }
   
-  displayedColumns: string[] = ['action', 'product', 'selector'];
+  displayedColumns: string[] = ['productId',  'selectortitle', 'action',  'title',  'description', 'price', 'imageUrls'];
   //taskdataSource = eaadata.data;
   
   ngOnInit(): void {
@@ -67,12 +67,9 @@ GetTaskList() {
     this._tasksService.TasksList(1,"google.com")
         .subscribe((result: any) => {
           debugger;
-            console.log(result.headers);
+            console.log(result.data);
             this.taskdataSource=result.data;
-            //this.tasktotalCount = JSON.parse(result.headers.get('X-Pagination')).totalCount;
- 
-            //this.taskdataSource = new MatTableDataSource<TasksResponseModel>(result.body.value);
-            
+        
           }, (data) => {
             this._sharedService.toastError(data.message);
         });

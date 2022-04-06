@@ -13,21 +13,35 @@
         </mat-expansion-panel-header>
        
         <table mat-table [dataSource]="taskdataSource" style="width: 100%;" matSort class="mat-elevation-z8">
-            <!-- SchemeID Column -->
+            <ng-container matColumnDef="productId">
+                <th  mat-header-cell *matHeaderCellDef > product Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.selector.productId}} </td>
+            </ng-container>  
+            <ng-container matColumnDef="selectortitle">
+                <th  mat-header-cell *matHeaderCellDef > selector title </th>
+                <td mat-cell *matCellDef="let element"> {{element.selector.title}} </td>
+            </ng-container>  
             <ng-container matColumnDef="action">
                 <th  mat-header-cell *matHeaderCellDef > action </th>
                 <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-            </ng-container>
-            <!-- SchemeName Column -->
-            <ng-container matColumnDef="product">
-                <th mat-header-cell *matHeaderCellDef > product </th>
+            </ng-container> 
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef > title </th>
                 <td mat-cell *matCellDef="let element"> {{element.product.title}} </td>
             </ng-container>
-            <ng-container matColumnDef="selector" sticky>
-                <th mat-header-cell *matHeaderCellDef > selector </th>
-                <td mat-cell *matCellDef="let element"> {{element.selector.productId}} </td>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef > description </th>
+                <td mat-cell *matCellDef="let element"> {{element.product.description}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef > price </th>
+                <td mat-cell *matCellDef="let element"> {{element.product.price}} </td>
+            </ng-container>
+            <ng-container matColumnDef="imageUrls">
+                <th mat-header-cell *matHeaderCellDef > imageUrls </th>
+                <td mat-cell *matCellDef="let element"> <img height="40" src="{{element.product.imageUrls}}"></td>
+            </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
